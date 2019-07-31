@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../static/lib/css/bootstrap.min.css">
+  </head>
+  <body>
+
+    <!--BEGIN NAV-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                New Document
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Rechnung</a>
+                <a class="dropdown-item" href="#">Kontoauszug</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Tankrechnung</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Tags</a>
+                  <a class="dropdown-item" href="#">Adresses</a>
+                  <a class="dropdown-item" href="#">Types</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">User</a>
+                </div>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+          </form>
+        </div>
+      </nav>
+    <!--END NAV-->
+
+    <!--BEGIN SEARCH-->
+    <div class="container" style="padding-top: 2em">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                  <div class="input-group">
+                      <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="#">ID</a>
+                          <a class="dropdown-item" href="#">Titel</a>
+                          <a class="dropdown-item" href="#">Beschreibung</a>
+                          <a class="dropdown-item" href="#">Absender</a>
+                          <div role="separator" class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Tags</a>
+                          <a class="dropdown-item" href="#">Datum</a>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--END SEARCH-->
+
+    <!--BEGIN LIST-->
+    <div class="container" style="padding-top: 2em; max-width: 100%;">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Types</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Rechnung</a>
+                      <a class="dropdown-item" href="#">Beleg</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                  </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tags</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Finanzamt</a>
+                    <a class="dropdown-item" href="#">Bank</a>
+                    <a class="dropdown-item" href="#">???</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">???</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive-sm">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Typ</th>
+                      <th scope="col">Titel</th>
+                      <th scope="col">Bezeichnung</th>
+                      <th scope="col">Datum</th>
+                      <th scope="col">Tag</th>
+                      <th scope="col">Open</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Rechnung</td>
+                      <td>Das ist der Titel</td>
+                      <td>Hier eine kurze beschreibung</td>
+                      <td>21.02.2019</td>
+                      <td><span class="badge badge-pill badge-danger">Primary</span> <span class="badge badge-pill badge-dark">Primary</span></td>
+                      <td><a href="#"><button class="btn btn-primary btn-sm">Open</button></a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Rechnung</td>
+                      <td>Das ist der Titel</td>
+                      <td>Hier eine kurze beschreibung</td>
+                      <td>21.02.2019</td>
+                      <td><span class="badge badge-pill badge-primary">Primary</span> <span class="badge badge-pill badge-light">Primary</span></td>
+                      <td><a href="#"><button class="btn btn-primary btn-sm">Open</button></a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Rechnung</td>
+                      <td>Das ist der Titel</td>
+                      <td>Hier eine kurze beschreibung</td>
+                      <td>21.02.2019</td>
+                      <td><span class="badge badge-pill badge-warning">Primary</span> <span class="badge badge-pill badge-success">Primary</span></td>
+                      <td><a href="#"><button class="btn btn-primary btn-sm">Open</button></a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>Rechnung</td>
+                      <td>Das ist der Titel</td>
+                      <td>Hier eine kurze beschreibung</td>
+                      <td>21.02.2019</td>
+                      <td><span class="badge badge-pill badge-primary">Primary</span> <span class="badge badge-pill badge-info">Primary</span></td>
+                      <td><a href="#"><button class="btn btn-primary btn-sm">Open</button></a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>Rechnung</td>
+                      <td>Das ist der Titel</td>
+                      <td>Hier eine kurze beschreibung</td>
+                      <td>21.02.2019</td>
+                      <td><span class="badge badge-pill badge-primary">Primary</span> <span class="badge badge-pill badge-danger">Primary</span></td>
+                      <td><a href="#"><button class="btn btn-primary btn-sm">Open</button></a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">6</th>
+                      <td>Rechnung</td>
+                      <td>Das ist der Titel</td>
+                      <td>Hier eine kurze beschreibung</td>
+                      <td>21.02.2019</td>
+                      <td><span class="badge badge-pill badge-secondary">Primary</span> <span class="badge badge-pill badge-success">Primary</span></td>
+                      <td><a href="#"><button class="btn btn-primary btn-sm">Open</button></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--END LIST-->
+  
+  </body>
+  <script src="../static/lib/js/jquery.js"></script>
+  <script src="../static/lib/js/popper.js"></script>
+  <script src="../static/lib/js/bootstrap.min.js"></script>
+</html>
