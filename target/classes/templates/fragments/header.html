@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" type="text/css" media="all"
-          href="../../lib/css/bootstrap.min.css" th:href="@{../../lib/css/bootstrap.min.css}"/>
+          href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
@@ -41,7 +41,7 @@
                     <a class="dropdown-item" href="#">Sender</a>
                     <a class="dropdown-item" href="#">Types</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">User</a>
+                    <a class="dropdown-item" th:href="@{/web/user}">User</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -54,7 +54,7 @@
     </div>
 </nav>
 </body>
-<script src="../../lib/js/jquery.js" th:src="@{../../lib/js/jquery.js}"></script>
-<script src="../../lib/js/popper.js" th:src="@{../../lib/js/popper.js}"></script>
-<script src="../../lib/js/bootstrap.min.js" th:src="@{../../lib/js/bootstrap.min.js}"></script>
+<script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+<script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+<script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>

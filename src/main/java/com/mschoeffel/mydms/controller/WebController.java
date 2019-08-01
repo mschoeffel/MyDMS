@@ -1,17 +1,21 @@
 package com.mschoeffel.mydms.controller;
 
+import com.mschoeffel.mydms.model.User;
 import com.mschoeffel.mydms.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/web")
 public class WebController {
 
     private UserService userService;
+
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Home */
+    /*----------------------------------------------------------------------------------------------------------------*/
 
     public WebController(UserService userService){
         this.userService = userService;
@@ -22,10 +26,14 @@ public class WebController {
         return "list.html";
     }
 
-    @GetMapping("/user")
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* User */
+    /*----------------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/users")
     public String showUserList(Model model){
         model.addAttribute("users", userService.findAll());
-        return "user.html";
+        return "users.html";
     }
 
     @GetMapping("/user/{username}")
@@ -33,4 +41,42 @@ public class WebController {
         model.addAttribute("user", userService.findById(username));
         return "editUser.html";
     }
+
+    @GetMapping("/user")
+    public String showNewUser(Model model){
+        model.addAttribute("user", new User());
+        return "editUser.html";
+    }
+
+    @PostMapping("/user/update/{username}")
+    public String updateUser(Model model, @ModelAttribute("user") User user, @PathVariable String username){
+        try {
+            userService.save(user);
+            model.addAttribute("message", "Save Successful");
+        } catch(Exception e){
+            model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
+        }
+
+        String id = "";
+        if(username != null && !username.isEmpty() && !username.equals("null")){
+            id = username;
+        } else{
+            id = user.getUsername();
+        }
+        model.addAttribute("user", userService.findById(id));
+        return "editUser.html";
+    }
+
+    @PostMapping("/user/delete/{username}")
+    public String deleteUser(Model model, @PathVariable String username){
+        try {
+            userService.deleteById(username);
+            model.addAttribute("message", "Delete Successful");
+        } catch(RuntimeException e){
+            model.addAttribute("error", e.getLocalizedMessage());
+        }
+        model.addAttribute("users", userService.findAll());
+        return "users.html";
+    }
+
 }

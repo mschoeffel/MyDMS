@@ -1,5 +1,7 @@
 package com.mschoeffel.mydms.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -8,8 +10,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="username")
+    @Column(name="username", updatable=false)
     private String username;
 
     @Column(name="password")
@@ -21,8 +22,12 @@ public class User {
     @Column(name="name")
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="date")
     private LocalDate date;
+
+    @Column(name="email")
+    private String email;
 
     public User() {
     }
@@ -65,5 +70,13 @@ public class User {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

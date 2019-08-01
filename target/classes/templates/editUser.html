@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <title>MyDMS</title>
     <link rel="stylesheet" type="text/css" media="all"
-          href="../../lib/css/bootstrap.min.css" th:href="@{../../lib/css/bootstrap.min.css}"/>
+          href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
     <style>
       .v-center {
         display: flex;
@@ -35,55 +35,51 @@
               </ul>
             </div>
             <div class="card-body">
-              <div class="alert alert-success" role="alert">
-                Erfolgeich abgemeldet
+              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
               </div>
-              <div class="alert alert-danger" role="alert">
-                Fehler
+              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
               </div>
-              <form>
+              <form th:action="@{/web/user/update/} + ${user.username}" th:object="${user}" method="POST">
                 <div class="form-row">
                   <div class="col-lg-4 mb-3">
-                    <label for="validationServer01">User</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Username" th:value="${user.username}" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="username">User</label>
+                    <input type="text" class="form-control is-valid" placeholder="Username" name="username" id="username" th:value="${user.username}">
                   </div>
                   <div class="col-lg-8 mb-3">
-                    <label for="validationServerUsername">E-Mail</label>
+                    <label for="email">E-Mail</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend3">@</span>
                       </div>
-                      <input type="email" class="form-control is-invalid" id="validationServerUsername" placeholder="E-Mail" value="test@test.de" aria-describedby="inputGroupPrepend3" required>
-                      <div class="invalid-feedback">
-                        <!--/*th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" th:text="${e.message}"*/-->
-                        Please choose a username.
-                      </div>
+                      <input type="email" class="form-control is-invalid" placeholder="E-Mail" name="email" id="email" th:value="${user.email}" aria-describedby="inputGroupPrepend3" >
                     </div>
                   </div>
                 </div>
                 <div class="form-row"><!--Only visible by new user-->
                   <div class="col-lg-4 mb-3">
-                    <label for="validationServer01">Password</label>
-                    <input type="password" class="form-control is-valid" id="validationServer01" placeholder="Password" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control is-valid" id="password" placeholder="Password" name="password" th:value="${user.password}">
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control is-valid" id="date" placeholder="2000-01-01" name="date" th:value="${user.date}">
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control is-valid" id="name" placeholder="Name" name="name" th:value="${user.name}">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="col-lg-6 mb-3 v-center">
                     <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1">
-                      <label class="custom-control-label" for="customCheck1">Active</label>
+                      <input type="checkbox" class="custom-control-input" id="enabled" name="enabled" th:checked="${user.enabled}">
+                      <label class="custom-control-label" for="enabled">Active</label>
                     </div>
                   </div>
                 </div>
                 <br>
                 <button class="btn btn-primary" type="submit">Save</button>
-                <button class="btn btn-secondary" type="submit">Cancel</button>
+                <a th:href="@{/web/home}"><button class="btn btn-secondary" type="button">Cancel</button></a>
                 <div class="float-right">
                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                     Delete
@@ -157,16 +153,18 @@
           <div class="modal-body">
             Soll der Datensatz und das Dokument wirklich gelöscht werden?
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </div>
+          <form th:action="@{/web/user/delete/} + ${user.username}" method="POST">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   
   </body>
-  <script src="../../lib/js/jquery.js" th:src="@{../../lib/js/jquery.js}"></script>
-  <script src="../../lib/js/popper.js" th:src="@{../../js/popper.js}"></script>
-  <script src="../../lib/js/bootstrap.min.js" th:src="@{../../lib/js/bootstrap.min.js}"></script>
+  <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+  <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+  <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>
