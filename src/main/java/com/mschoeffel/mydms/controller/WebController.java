@@ -57,7 +57,7 @@ public class WebController {
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
-        String id = "";
+        String id;
         if(username != null && !username.isEmpty() && !username.equals("null")){
             id = username;
         } else{
