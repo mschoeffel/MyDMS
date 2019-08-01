@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../lib/css/bootstrap.min.css" th:href="@{../../lib/css/bootstrap.min.css}"/>
+    <style>
+        .v-center {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<!--BEGIN NAV-->
+<!--END NAV-->
+
+<div class="container" style="padding-top: 2em" th:fragment="search">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">Search
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">ID</a>
+                                <a class="dropdown-item" href="#">Titel</a>
+                                <a class="dropdown-item" href="#">Beschreibung</a>
+                                <a class="dropdown-item" href="#">Absender</a>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Tags</a>
+                                <a class="dropdown-item" href="#">Datum</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="../../lib/js/jquery.js" th:src="@{../../lib/js/jquery.js}"></script>
+<script src="../../lib/js/popper.js" th:src="@{../../lib/js/popper.js}"></script>
+<script src="../../lib/js/bootstrap.min.js" th:src="@{../../lib/js/bootstrap.min.js}"></script>
+</html>

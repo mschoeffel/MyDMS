@@ -1,0 +1,172 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>MyDMS</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../lib/css/bootstrap.min.css" th:href="@{../../lib/css/bootstrap.min.css}"/>
+    <style>
+      .v-center {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+
+  <!--BEGIN NAV-->
+  <div th:replace="fragments/header :: header">&nbsp;</div>
+  <!--END NAV-->
+
+    <div class="container" style="max-width: 100%">
+      <div class="row">
+        <div class="col-xl-9 d-flex align-items-stretch" style="padding-top: 2em">
+          <div class="card" style="width: 100%">
+            <div class="card-header">
+              <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Actions</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Change password</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Andere aktion</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-success" role="alert">
+                Erfolgeich abgemeldet
+              </div>
+              <div class="alert alert-danger" role="alert">
+                Fehler
+              </div>
+              <form>
+                <div class="form-row">
+                  <div class="col-lg-4 mb-3">
+                    <label for="validationServer01">User</label>
+                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Username" th:value="${user.username}" required>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-lg-8 mb-3">
+                    <label for="validationServerUsername">E-Mail</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                      </div>
+                      <input type="email" class="form-control is-invalid" id="validationServerUsername" placeholder="E-Mail" value="test@test.de" aria-describedby="inputGroupPrepend3" required>
+                      <div class="invalid-feedback">
+                        <!--/*th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" th:text="${e.message}"*/-->
+                        Please choose a username.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row"><!--Only visible by new user-->
+                  <div class="col-lg-4 mb-3">
+                    <label for="validationServer01">Password</label>
+                    <input type="password" class="form-control is-valid" id="validationServer01" placeholder="Password" required>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-lg-6 mb-3 v-center">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                      <label class="custom-control-label" for="customCheck1">Active</label>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-secondary" type="submit">Cancel</button>
+                <div class="float-right">
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Delete
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 d-flex align-items-stretch" style="padding-top: 2em">
+          <div class="card" style="width: 100%">
+            <div class="card-header">
+              <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Action</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Add Right WEB</a>
+                    <a class="dropdown-item" href="#">Add Right ADMIN</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Andere aktion</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-success" role="alert">
+                  Erfolgeich abgemeldet
+                </div>
+                <div class="alert alert-danger" role="alert">
+                  Fehler
+                </div>
+              <div class="table-responsive-md">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Right</th>
+                      <th scope="col">Insdate</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">WEB</th>
+                      <td>21.02.2019</td>
+                      <td><a href="#"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">ADMIN</th>
+                      <td>21.02.2019</td>
+                      <td><a href="#"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Soll der Datensatz und das Dokument wirklich gelöscht werden?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </body>
+  <script src="../../lib/js/jquery.js" th:src="@{../../lib/js/jquery.js}"></script>
+  <script src="../../lib/js/popper.js" th:src="@{../../js/popper.js}"></script>
+  <script src="../../lib/js/bootstrap.min.js" th:src="@{../../lib/js/bootstrap.min.js}"></script>
+</html>

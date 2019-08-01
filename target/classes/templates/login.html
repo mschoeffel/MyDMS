@@ -1,62 +1,66 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <link rel="stylesheet" type="text/css" media="all"
-          href="lib/css/bootstrap.min.css" th:href="@{lib/css/bootstrap.min.css}" />
+          href="lib/css/bootstrap.min.css" th:href="@{lib/css/bootstrap.min.css}"/>
     <title>MyDMS</title>
-  </head>
-  <body>
+</head>
+<body>
 
-    <div class="container" style="padding-top: 2em">
-      <div class="row">
+<div class="container" style="padding-top: 2em">
+    <div class="row">
         <div class="col-sm-12">
-          <div class="card">
-            <div class="card-header">
-              LOGIN
-            </div>
-            <div class="card-body">
-              <div th:if="${logoutSuccess}" class="alert alert-success" role="alert">
-                Erfolgeich abgemeldet
-              </div>
-              <div th:if="${loginError}" class="alert alert-danger" role="alert">
-                Username or Password incorrect
-              </div>
-              <div th:if="${accessError}" class="alert alert-danger" role="alert">
-                Fehler
-              </div>
-              <form th:action="@{/login}" method="POST">
-                <div class="form-row">
-                  <div class="col-md-12 mb-12">
-                    <label for="username">Username</label>
-                    <input type="text" th:class="${loginError} == true ? 'form-control is-invalid' : 'form-control' " id="username" name="username" placeholder="Username" required autofocus>
-                    <div th:if="${loginError}" class="invalid-feedback">
-                      Invalid input
+            <div class="card">
+                <div class="card-header">
+                    LOGIN
+                </div>
+                <div class="card-body">
+                    <div th:if="${logoutSuccess}" class="alert alert-success" role="alert">
+                        Erfolgeich abgemeldet
                     </div>
-                  </div>
-                </div>
-                <br>
-                <div class="form-row">
-                  <div class="col-md-12 mb-12">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" th:class="${loginError} == true ? 'form-control is-invalid' : 'form-control' "  placeholder="Password" required>
-                    <div th:if="${loginError}" class="invalid-feedback">
-                      Invalid input
+                    <div th:if="${loginError}" class="alert alert-danger" role="alert">
+                        Username or Password incorrect
                     </div>
-                  </div>
+                    <div th:if="${accessError}" class="alert alert-danger" role="alert">
+                        Fehler
+                    </div>
+                    <form th:action="@{/login}" method="POST">
+                        <div class="form-row">
+                            <div class="col-md-12 mb-12">
+                                <label for="username">Username</label>
+                                <input type="text"
+                                       th:class="${loginError} == true ? 'form-control is-invalid' : 'form-control' "
+                                       id="username" name="username" placeholder="Username" required autofocus>
+                                <div th:if="${loginError}" class="invalid-feedback">
+                                    Invalid input
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-12">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password"
+                                       th:class="${loginError} == true ? 'form-control is-invalid' : 'form-control' "
+                                       placeholder="Password" required>
+                                <div th:if="${loginError}" class="invalid-feedback">
+                                    Invalid input
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        <div class="float-right">
+                            <button class="btn btn-secondary" type="submit">Password forgot</button>
+                        </div>
+                    </form>
                 </div>
-                <br/>
-                <button class="btn btn-primary" type="submit">Login</button>
-                <div class="float-right">
-                    <button class="btn btn-secondary" type="submit">Password forgot</button>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
-  </body>
-  <script src="lib/js/jquery.js" th:src="@{lib/js/jquery.js}"></script>
-  <script src="lib/js/popper.js" th:src="@{lib/js/popper.js}"></script>
-  <script src="lib/js/bootstrap.min.js" th:src="@{lib/js/bootstrap.min.js}"></script>
+</body>
+<script src="lib/js/jquery.js" th:src="@{lib/js/jquery.js}"></script>
+<script src="lib/js/popper.js" th:src="@{lib/js/popper.js}"></script>
+<script src="lib/js/bootstrap.min.js" th:src="@{lib/js/bootstrap.min.js}"></script>
 </html>

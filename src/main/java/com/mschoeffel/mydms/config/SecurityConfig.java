@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/**").hasRole("WEB")
                 .and()
                 .csrf().disable()
-                .formLogin().loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/web/index")
+                .formLogin().loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/web/home")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-success")
                 .and().exceptionHandling().accessDeniedPage("/accessDenied");
     }

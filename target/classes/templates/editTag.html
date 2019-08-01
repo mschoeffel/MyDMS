@@ -1,6 +1,8 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../static/lib/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>MyDMS</title>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
     <style>
       .v-center {
         display: flex;
@@ -55,7 +57,7 @@
           </form>
 
           <form class="form-inline my-2 my-lg-0" style="padding-left: 5em">
-              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
           </form>
         </div>
       </nav>
@@ -63,26 +65,10 @@
 
     <div class="container" style="padding-top: 2em">
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-xl-12">
           <div class="card">
             <div class="card-header">
-              <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#">Download</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">mschoeffel</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Actions</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Andere aktion</a>
-                  </div>
-                </li>
-              </ul>
+              Edit Tag
             </div>
             <div class="card-body">
               <div class="alert alert-success" role="alert">
@@ -93,89 +79,52 @@
               </div>
               <form>
                 <div class="form-row">
-                  <div class="col-md-4 mb-3">
-                    <label for="validationServer01">First name</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+                  <div class="col-lg-4 mb-3">
+                    <label for="validationServer01">Tag</label>
+                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Tag" value="Finanzen" required>
                     <div class="valid-feedback">
                       Looks good!
                     </div>
                   </div>
-                  <div class="col-md-4 mb-3">
-                    <label for="inlineFormCustomSelect">Preference</label>
+                  <div class="col-lg-4 mb-3">
+                    <label for="inlineFormCustomSelect">Color</label>
                     <select class="custom-select is-valid" id="inlineFormCustomSelect">
                       <option selected>Choose...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
+                      <option value="badge-danger">Red</option>
+                      <option value="badge-primary">Blue</option>
                       <option value="3">Three</option>
                     </select>
                     <div class="valid-feedback">
                       Looks good!
                     </div>
                   </div>
-                  <div class="col-md-4 mb-3">
-                    <label for="validationServerUsername">Username</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
-                      </div>
-                      <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
-                      <div class="invalid-feedback">
-                        Please choose a username.
-                      </div>
+                  <div class="col-lg-4 mb-3">
+                    <label for="validationServer01">User</label>
+                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="User" value="mschoeffel" disabled>
+                    <div class="valid-feedback">
+                      Looks good!
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-6 mb-3">
-                    <label for="validationServer03">City</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+                  <div class="col-lg-8 mb-3">
+                    <label for="validationServer03">Text</label>
+                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="Text" value="Tag für jegliche Finanzunterlagen" required>
                     <div class="invalid-feedback">
                       Please provide a valid city.
                     </div>
                   </div>
-                  <div class="col-md-3 mb-3">
-                    <label for="validationServer04">State</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
-                    <div class="invalid-feedback">
-                      Please provide a valid state.
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <label for="validationServer05">Zip</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
-                    <div class="invalid-feedback">
-                      Please provide a valid zip.
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-md-6 mb-3">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                      <div class="invalid-feedback">Example invalid custom file feedback</div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-3 v-center">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1">
-                      <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="form-check">
-                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                    <label class="form-check-label" for="invalidCheck3">
-                      Agree to terms and conditions
-                    </label>
-                    <div class="invalid-feedback">
-                      You must agree before submitting.
+                  <div class="col-lg-4 mb-3">
+                    <label for="validationServer01">Date</label>
+                    <input type="date" class="form-control is-valid" id="validationServer01" placeholder="2000-01-01" value="2019-02-01" disabled>
+                    <div class="valid-feedback">
+                      Looks good!
                     </div>
                   </div>
                 </div>
                 <br>
                 <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-secondary" type="submit">Cancel</button>
                 <div class="float-right">
                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                     Delete
@@ -210,7 +159,7 @@
     </div>
   
   </body>
-  <script src="../static/lib/js/jquery.js"></script>
-  <script src="../static/lib/js/popper.js"></script>
-  <script src="../static/lib/js/bootstrap.min.js"></script>
+  <script src="lib/js/jquery.js"></script>
+  <script src="lib/js/popper.js"></script>
+  <script src="lib/js/bootstrap.min.js"></script>
 </html>
