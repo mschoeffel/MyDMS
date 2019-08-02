@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -28,6 +29,11 @@ public class User {
 
     @Column(name="email")
     private String email;
+
+    @OneToMany(mappedBy = "type",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    private List<Type> types;
 
     public User() {
     }
