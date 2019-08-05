@@ -13,6 +13,8 @@ public interface TypeService {
 
     public Type save(Type type);
 
+    public boolean existsId(String short_name);
+
     public void deleteById(String short_name);
 
 }

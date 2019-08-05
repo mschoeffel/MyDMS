@@ -4,9 +4,13 @@ import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.model.User;
 import com.mschoeffel.mydms.service.TypeService;
 import com.mschoeffel.mydms.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/web")
@@ -48,12 +52,31 @@ public class WebController {
 
     @GetMapping("/user")
     public String showNewUser(Model model){
-        model.addAttribute("user", new User());
+        User user = new User();
+        user.setDate(LocalDate.now());
+        model.addAttribute("user", user);
         return "editUser.html";
     }
 
     @PostMapping("/user/update/{username}")
     public String updateUser(Model model, @ModelAttribute("user") User user, @PathVariable String username){
+        String id;
+        if(userService.existsId(user.getUsername())){
+            //Already exists
+            User userold = userService.findById(user.getUsername());
+            user.setDate(userold.getDate());
+            user.setPassword(userold.getPassword());
+            user.setUsername(userold.getUsername());
+        } else{
+            //Need to create new
+            user.setDate(LocalDate.now());
+        }
+        if(username != null && !username.isEmpty() && !username.equals("null")){
+            id = username;
+        } else{
+            id = user.getUsername();
+        }
+
         try {
             userService.save(user);
             model.addAttribute("message", "Save Successful");
@@ -61,12 +84,7 @@ public class WebController {
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
-        String id;
-        if(username != null && !username.isEmpty() && !username.equals("null")){
-            id = username;
-        } else{
-            id = user.getUsername();
-        }
+
         model.addAttribute("user", userService.findById(id));
         return "editUser.html";
     }
@@ -101,27 +119,40 @@ public class WebController {
 
     @GetMapping("/type")
     public String showNewType(Model model){
-        model.addAttribute("type", new Type());
+        Type type = new Type();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        type.setUser(userService.findById(authentication.getName()));
+        type.setDate(LocalDate.now());
+        model.addAttribute("type", type);
         return "editType.html";
     }
 
     @PostMapping("/type/update/{typeshort}")
     public String updateType(Model model, @ModelAttribute("type") Type type, @PathVariable String typeshort){
-        try {
-            Type typeold = typeService.findById(typeshort);
+        String id;
+        if(typeService.existsId(type.getShort_name())){
+            //Already exists
+            Type typeold = typeService.findById(type.getShort_name());
             type.setUser(typeold.getUser());
+            type.setShort_name(typeold.getShort_name());
+            type.setDate(typeold.getDate());
+            id = typeshort;
+        } else{
+            //Need to create new
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            type.setUser(userService.findById(authentication.getName()));
+            type.setDate(LocalDate.now());
+            id = type.getShort_name();
+        }
+
+        try {
             typeService.save(type);
             model.addAttribute("message", "Save Successful");
         } catch(Exception e){
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
-        String id;
-        if(typeshort != null && !typeshort.isEmpty() && !typeshort.equals("null")){
-            id = typeshort;
-        } else{
-            id = type.getShort_name();
-        }
+
         model.addAttribute("type", typeService.findById(id));
         return "editType.html";
     }

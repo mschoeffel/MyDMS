@@ -29,7 +29,7 @@
               </div>
               <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
               </div>
-              <form th:action="@{/web/type/update/} + ${type.short_name}" th:object="${type}" method="POST">
+              <form th:action="@{/web/type/update/} + ${type.short_name}" method="POST">
                 <div class="form-row">
                   <div class="col-lg-4 mb-3">
                     <label for="name">Type</label>
@@ -37,11 +37,11 @@
                   </div>
                   <div class="col-lg-4 mb-3">
                       <label for="short_name">Short</label>
-                      <input type="text" class="form-control" id="short_name" name="short_name" placeholder="Short" th:value="${type.short_name}" required>
+                      <input type="text" class="form-control" id="short_name" placeholder="Short" name="short_name" th:value="${type.short_name}" required>
                     </div>
                   <div class="col-lg-4 mb-3">
-                    <label>User</label>
-                    <input type="text" class="form-control" placeholder="User" th:value="${type.user.username}" disabled>
+                    <label for="user">User</label>
+                    <input type="text" class="form-control" placeholder="User" id="user" th:value="${type.user.username}" disabled>
                   </div>
                 </div>
                 <div class="form-row">
@@ -51,7 +51,7 @@
                   </div>
                   <div class="col-lg-4 mb-3">
                     <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" name="date" th:value="${type.date}">
+                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" th:value="${type.date}" disabled>
                   </div>
                 </div>
                 <br>

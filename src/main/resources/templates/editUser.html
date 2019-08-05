@@ -39,11 +39,11 @@
               </div>
               <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
               </div>
-              <form th:action="@{/web/user/update/} + ${user.username}" th:object="${user}" method="POST">
+              <form th:action="@{/web/user/update/} + ${user.username}" method="POST">
                 <div class="form-row">
                   <div class="col-lg-4 mb-3">
                     <label for="username">User</label>
-                    <input type="text" class="form-control" placeholder="Username" name="username" id="username" th:value="${user.username}">
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" th:value="${user.username}" required>
                   </div>
                   <div class="col-lg-8 mb-3">
                     <label for="email">E-Mail</label>
@@ -51,18 +51,18 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend3">@</span>
                       </div>
-                      <input type="email" class="form-control" placeholder="E-Mail" name="email" id="email" th:value="${user.email}" aria-describedby="inputGroupPrepend3" >
+                      <input type="email" class="form-control" placeholder="E-Mail" name="email" id="email" th:value="${user.email}" aria-describedby="inputGroupPrepend3">
                     </div>
                   </div>
                 </div>
                 <div class="form-row"><!--Only visible by new user-->
                   <div class="col-lg-4 mb-3" th:if="${user.username} == null">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" th:value="${user.password}">
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" th:value="${user.password}" required>
                   </div>
                   <div class="col-lg-4 mb-3">
                     <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" name="date" th:value="${user.date}">
+                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" th:value="${user.date}">
                   </div>
                   <div class="col-lg-4 mb-3">
                     <label for="name">Name</label>

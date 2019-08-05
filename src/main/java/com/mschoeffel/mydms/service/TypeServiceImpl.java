@@ -33,6 +33,9 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
+    public boolean existsId(String short_name){ return typeRepository.existsById(short_name); }
+
+    @Override
     public Type save(Type type) {
         return typeRepository.save(type);
     }

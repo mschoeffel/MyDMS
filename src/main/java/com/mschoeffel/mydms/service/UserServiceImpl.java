@@ -36,6 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean existsId(String username){ return userRepository.existsById(username); }
+
+    @Override
     public void deleteById(String username) {
         userRepository.deleteById(username);
     }

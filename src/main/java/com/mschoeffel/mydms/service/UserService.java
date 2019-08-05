@@ -12,6 +12,8 @@ public interface UserService {
 
     public User save(User user);
 
+    public boolean existsId(String username);
+
     public void deleteById(String username);
 
 }
