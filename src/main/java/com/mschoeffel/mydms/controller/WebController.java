@@ -1,5 +1,6 @@
 package com.mschoeffel.mydms.controller;
 
+import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.model.User;
 import com.mschoeffel.mydms.service.TypeService;
 import com.mschoeffel.mydms.service.UserService;
@@ -83,7 +84,7 @@ public class WebController {
     }
 
     /*----------------------------------------------------------------------------------------------------------------*/
-    /* User */
+    /* Types */
     /*----------------------------------------------------------------------------------------------------------------*/
     @GetMapping("/types")
     public String showTypeList(Model model){
@@ -91,48 +92,48 @@ public class WebController {
         return "types.html";
     }
 
-    /*
-    @GetMapping("/user/{username}")
-    public String showUser(Model model, @PathVariable String username){
-        model.addAttribute("user", userService.findById(username));
-        return "editUser.html";
+
+    @GetMapping("/type/{typeshort}")
+    public String showType(Model model, @PathVariable String typeshort){
+        model.addAttribute("type", typeService.findById(typeshort));
+        return "editType.html";
     }
 
-    @GetMapping("/user")
-    public String showNewUser(Model model){
-        model.addAttribute("user", new User());
-        return "editUser.html";
+    @GetMapping("/type")
+    public String showNewType(Model model){
+        model.addAttribute("type", new Type());
+        return "editType.html";
     }
 
-    @PostMapping("/user/update/{username}")
-    public String updateUser(Model model, @ModelAttribute("user") User user, @PathVariable String username){
+    @PostMapping("/type/update/{typeshort}")
+    public String updateType(Model model, @ModelAttribute("type") Type type, @PathVariable String typeshort){
         try {
-            userService.save(user);
+            typeService.save(type);
             model.addAttribute("message", "Save Successful");
         } catch(Exception e){
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
         String id;
-        if(username != null && !username.isEmpty() && !username.equals("null")){
-            id = username;
+        if(typeshort != null && !typeshort.isEmpty() && !typeshort.equals("null")){
+            id = typeshort;
         } else{
-            id = user.getUsername();
+            id = type.getShort_name();
         }
-        model.addAttribute("user", userService.findById(id));
-        return "editUser.html";
+        model.addAttribute("type", typeService.findById(id));
+        return "editType.html";
     }
 
-    @PostMapping("/user/delete/{username}")
-    public String deleteUser(Model model, @PathVariable String username){
+    @PostMapping("/type/delete/{typeshort}")
+    public String deleteType(Model model, @PathVariable String typeshort){
         try {
-            userService.deleteById(username);
+            typeService.deleteById(typeshort);
             model.addAttribute("message", "Delete Successful");
         } catch(RuntimeException e){
             model.addAttribute("error", e.getLocalizedMessage());
         }
-        model.addAttribute("users", userService.findAll());
-        return "users.html";
-    }*/
+        model.addAttribute("types", typeService.findAll());
+        return "types.html";
+    }
 
 }
