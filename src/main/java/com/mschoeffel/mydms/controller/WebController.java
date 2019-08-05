@@ -108,6 +108,8 @@ public class WebController {
     @PostMapping("/type/update/{typeshort}")
     public String updateType(Model model, @ModelAttribute("type") Type type, @PathVariable String typeshort){
         try {
+            Type typeold = typeService.findById(typeshort);
+            type.setUser(typeold.getUser());
             typeService.save(type);
             model.addAttribute("message", "Save Successful");
         } catch(Exception e){

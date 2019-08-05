@@ -19,11 +19,15 @@
             <div class="card-header">
               <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">New Type</a>
+                  <a class="nav-link active" th:href="@{/web/type/}">New Type</a>
                 </li>
               </ul>
             </div>
             <div class="card-body">
+              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
+              </div>
+              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
+              </div>
               <div class="table-responsive-md">
                 <table class="table table-striped">
                   <thead>

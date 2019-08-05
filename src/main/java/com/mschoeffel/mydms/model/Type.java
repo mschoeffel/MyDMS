@@ -21,7 +21,7 @@ public class Type {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user", updatable=false)
     private User user;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

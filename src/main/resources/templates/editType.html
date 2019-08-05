@@ -1,8 +1,9 @@
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
-    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
     <style>
       .v-center {
         display: flex;
@@ -13,54 +14,7 @@
   <body>
 
     <!--BEGIN NAV-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                New Document
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Rechnung</a>
-                <a class="dropdown-item" href="#">Kontoauszug</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Tankrechnung</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Settings
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Tags</a>
-                  <a class="dropdown-item" href="#">Adresses</a>
-                  <a class="dropdown-item" href="#">Types</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">User</a>
-                </div>
-              </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search ID" aria-label="Search ID">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-
-          <form class="form-inline my-2 my-lg-0" style="padding-left: 5em">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
-          </form>
-        </div>
-      </nav>
+    <div th:replace="fragments/header :: header">&nbsp;</div>
     <!--END NAV-->
 
     <div class="container" style="padding-top: 2em">
@@ -71,55 +25,38 @@
               Edit Type
             </div>
             <div class="card-body">
-              <div class="alert alert-success" role="alert">
-                Erfolgeich abgemeldet
+              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
               </div>
-              <div class="alert alert-danger" role="alert">
-                Fehler
+              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
               </div>
-              <form>
+              <form th:action="@{/web/type/update/} + ${type.short_name}" th:object="${type}" method="POST">
                 <div class="form-row">
                   <div class="col-lg-4 mb-3">
-                    <label for="validationServer01">Type</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Type" value="Rechnung" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="name">Type</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Type" th:value="${type.name}" required>
                   </div>
                   <div class="col-lg-4 mb-3">
-                      <label for="validationServer01">Short</label>
-                      <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Short" value="R" required>
-                      <div class="valid-feedback">
-                        Looks good!
-                      </div>
+                      <label for="short_name">Short</label>
+                      <input type="text" class="form-control" id="short_name" name="short_name" placeholder="Short" th:value="${type.short_name}" required>
                     </div>
                   <div class="col-lg-4 mb-3">
-                    <label for="validationServer01">User</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="User" value="mschoeffel" disabled>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label>User</label>
+                    <input type="text" class="form-control" placeholder="User" th:value="${type.user.username}" disabled>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="col-lg-8 mb-3">
-                    <label for="validationServer03">Text</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="Text" value="Rechnungen eben" required>
-                    <div class="invalid-feedback">
-                      Please provide a valid city.
-                    </div>
+                    <label for="text">Text</label>
+                    <input type="text" class="form-control" id="text" name="text" placeholder="Text" th:value="${type.text}" required>
                   </div>
                   <div class="col-lg-4 mb-3">
-                    <label for="validationServer01">Date</label>
-                    <input type="date" class="form-control is-valid" id="validationServer01" placeholder="2000-01-01" value="2019-04-05" disabled>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" name="date" th:value="${type.date}">
                   </div>
                 </div>
                 <br>
                 <button class="btn btn-primary" type="submit">Save</button>
-                <button class="btn btn-secondary" type="submit">Cancel</button>
+                <a th:href="@{/web/home}"><button class="btn btn-secondary">Cancel</button></a>
                 <div class="float-right">
                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                     Delete
@@ -145,16 +82,18 @@
           <div class="modal-body">
             Soll der Datensatz und das Dokument wirklich gelöscht werden?
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </div>
+          <form th:action="@{/web/type/delete/} + ${type.short_name}" method="POST">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   
   </body>
-  <script src="lib/js/jquery.js"></script>
-  <script src="lib/js/popper.js"></script>
-  <script src="lib/js/bootstrap.min.js"></script>
+  <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+  <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+  <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>
