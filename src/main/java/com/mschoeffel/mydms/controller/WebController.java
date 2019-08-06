@@ -193,7 +193,7 @@ public class WebController {
         return "editTag.html";
     }
 
-    @PostMapping("/tag/update/{tag}")
+    @PostMapping("/tag/update/{tag_name}")
     public String updateType(Model model, @ModelAttribute("tag") Tag tag, @PathVariable String tag_name){
         if(tagService.existsId(tag.getTag())){
             //Already exists
