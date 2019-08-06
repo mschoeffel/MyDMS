@@ -1,7 +1,9 @@
 package com.mschoeffel.mydms.controller;
 
+import com.mschoeffel.mydms.model.Tag;
 import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.model.User;
+import com.mschoeffel.mydms.service.TagService;
 import com.mschoeffel.mydms.service.TypeService;
 import com.mschoeffel.mydms.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -18,15 +20,17 @@ public class WebController {
 
     private UserService userService;
     private TypeService typeService;
+    private TagService tagService;
 
 
     /*----------------------------------------------------------------------------------------------------------------*/
     /* Home */
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    public WebController(UserService userService, TypeService typeService){
+    public WebController(UserService userService, TypeService typeService, TagService tagService){
         this.userService = userService;
         this.typeService = typeService;
+        this.tagService = tagService;
     }
 
     @GetMapping("/home")
@@ -71,11 +75,6 @@ public class WebController {
             //Need to create new
             user.setDate(LocalDate.now());
         }
-        if(username != null && !username.isEmpty() && !username.equals("null")){
-            id = username;
-        } else{
-            id = user.getUsername();
-        }
 
         try {
             userService.save(user);
@@ -85,7 +84,7 @@ public class WebController {
         }
 
 
-        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("user", userService.findById(user.getUsername()));
         return "editUser.html";
     }
 
@@ -129,20 +128,17 @@ public class WebController {
 
     @PostMapping("/type/update/{typeshort}")
     public String updateType(Model model, @ModelAttribute("type") Type type, @PathVariable String typeshort){
-        String id;
         if(typeService.existsId(type.getShort_name())){
             //Already exists
             Type typeold = typeService.findById(type.getShort_name());
             type.setUser(typeold.getUser());
             type.setShort_name(typeold.getShort_name());
             type.setDate(typeold.getDate());
-            id = typeshort;
         } else{
             //Need to create new
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             type.setUser(userService.findById(authentication.getName()));
             type.setDate(LocalDate.now());
-            id = type.getShort_name();
         }
 
         try {
@@ -153,7 +149,7 @@ public class WebController {
         }
 
 
-        model.addAttribute("type", typeService.findById(id));
+        model.addAttribute("type", typeService.findById(type.getShort_name()));
         return "editType.html";
     }
 
@@ -169,6 +165,73 @@ public class WebController {
         }
         model.addAttribute("types", typeService.findAll());
         return "types.html";
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Tags */
+    /*----------------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/tags")
+    public String showTagList(Model model){
+        model.addAttribute("tags", tagService.findAll());
+        return "tags.html";
+    }
+
+
+    @GetMapping("/tag/{tag}")
+    public String showTag(Model model, @PathVariable String tag){
+        model.addAttribute("tag", tagService.findById(tag));
+        return "editTag.html";
+    }
+
+    @GetMapping("/tag")
+    public String showNewTag(Model model){
+        Tag tag = new Tag();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        tag.setUser(userService.findById(authentication.getName()));
+        tag.setDate(LocalDate.now());
+        model.addAttribute("tag", tag);
+        return "editTag.html";
+    }
+
+    @PostMapping("/tag/update/{tag}")
+    public String updateType(Model model, @ModelAttribute("tag") Tag tag, @PathVariable String tag_name){
+        if(tagService.existsId(tag.getTag())){
+            //Already exists
+            Tag tagold = tagService.findById(tag.getTag());
+            tag.setUser(tagold.getUser());
+            tag.setTag(tagold.getTag());
+            tag.setDate(tagold.getDate());
+        } else{
+            //Need to create new
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            tag.setUser(userService.findById(authentication.getName()));
+            tag.setDate(LocalDate.now());
+        }
+
+        try {
+            tagService.save(tag);
+            model.addAttribute("message", "Save Successful");
+        } catch(Exception e){
+            model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
+        }
+
+
+        model.addAttribute("tag", tagService.findById(tag.getTag()));
+        return "editTag.html";
+    }
+
+
+
+    @PostMapping("/tag/delete/{tag}")
+    public String deleteTag(Model model, @PathVariable String tag){
+        try {
+            tagService.deleteById(tag);
+            model.addAttribute("message", "Delete Successful");
+        } catch(RuntimeException e){
+            model.addAttribute("error", e.getLocalizedMessage());
+        }
+        model.addAttribute("tags", tagService.findAll());
+        return "tags.html";
     }
 
 }
