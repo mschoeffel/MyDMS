@@ -43,7 +43,7 @@
                 <div class="form-row">
                   <div class="col-lg-4 mb-3">
                     <label for="username">User</label>
-                    <input type="text" class="form-control" placeholder="Username" id="username" th:value="${user.username}" required>
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" th:value="${user.username}" required>
                   </div>
                   <div class="col-lg-8 mb-3">
                     <label for="email">E-Mail</label>
@@ -58,7 +58,7 @@
                 <div class="form-row"><!--Only visible by new user-->
                   <div class="col-lg-4 mb-3" th:if="${user.username} == null">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" th:value="${user.password}" required>
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" th:value="${user.password}" required>
                   </div>
                   <div class="col-lg-4 mb-3">
                     <label for="date">Date</label>

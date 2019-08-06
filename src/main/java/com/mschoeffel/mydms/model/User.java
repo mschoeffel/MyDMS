@@ -1,5 +1,6 @@
 package com.mschoeffel.mydms.model;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="users")
+@DynamicUpdate
 public class User {
 
     @Id
@@ -24,15 +26,14 @@ public class User {
     private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="date")
+    @Column(name="date", updatable = false)
     private LocalDate date;
 
     @Column(name="email")
     private String email;
 
     @OneToMany(mappedBy = "user",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
+            cascade = CascadeType.ALL)
     private List<Type> types;
 
     public User() {

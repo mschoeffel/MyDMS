@@ -1,12 +1,15 @@
 package com.mschoeffel.mydms.model;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
 @Table(name="types")
+@DynamicUpdate
 public class Type {
 
     @Id
@@ -19,13 +22,12 @@ public class Type {
     @Column(name="text")
     private String text;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "user", updatable=false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user", updatable = false)
     private User user;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="date")
+    @Column(name="date", updatable = false)
     private LocalDate date;
 
 

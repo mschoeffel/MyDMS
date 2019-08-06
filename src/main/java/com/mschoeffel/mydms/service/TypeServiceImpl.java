@@ -37,7 +37,9 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public Type save(Type type) {
-        return typeRepository.save(type);
+        typeRepository.save(type);
+        typeRepository.flush();
+        return findById(type.getShort_name());
     }
 
     @Override

@@ -157,6 +157,8 @@ public class WebController {
         return "editType.html";
     }
 
+
+
     @PostMapping("/type/delete/{typeshort}")
     public String deleteType(Model model, @PathVariable String typeshort){
         try {
