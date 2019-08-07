@@ -156,7 +156,7 @@ public class WebController {
         model.addAttribute("type", typeService.findById(type.getShort_name()));
         return "editType.html";
     }
-    
+
     @PostMapping("/type/delete/{typeshort}")
     public String deleteType(Model model, @PathVariable String typeshort){
         try {
