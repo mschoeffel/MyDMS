@@ -30,7 +30,7 @@ public class WebController {
     /* Home */
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    public WebController(UserService userService, TypeService typeService, TagService tagService, SenderService senderService){
+    public WebController(UserService userService, TypeService typeService, TagService tagService, SenderService senderService) {
         this.userService = userService;
         this.typeService = typeService;
         this.tagService = tagService;
@@ -38,7 +38,7 @@ public class WebController {
     }
 
     @GetMapping("/home")
-    public String showHome(){
+    public String showHome() {
         return "list.html";
     }
 
@@ -47,19 +47,19 @@ public class WebController {
     /* User */
     /*----------------------------------------------------------------------------------------------------------------*/
     @GetMapping("/users")
-    public String showUserList(Model model){
+    public String showUserList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "users.html";
     }
 
     @GetMapping("/user/{username}")
-    public String showUser(Model model, @PathVariable String username){
+    public String showUser(Model model, @PathVariable String username) {
         model.addAttribute("user", userService.findById(username));
         return "editUser.html";
     }
 
     @GetMapping("/user")
-    public String showNewUser(Model model){
+    public String showNewUser(Model model) {
         User user = new User();
         user.setDate(LocalDate.now());
         model.addAttribute("user", user);
@@ -67,15 +67,15 @@ public class WebController {
     }
 
     @PostMapping("/user/update/{username}")
-    public String updateUser(Model model, @ModelAttribute("user") User user, @PathVariable String username){
+    public String updateUser(Model model, @ModelAttribute("user") User user, @PathVariable String username) {
         String id;
-        if(userService.existsId(user.getUsername())){
+        if (userService.existsId(user.getUsername())) {
             //Already exists
             User userold = userService.findById(user.getUsername());
             user.setDate(userold.getDate());
             user.setPassword(userold.getPassword());
             user.setUsername(userold.getUsername());
-        } else{
+        } else {
             //Need to create new
             user.setDate(LocalDate.now());
         }
@@ -83,7 +83,7 @@ public class WebController {
         try {
             userService.save(user);
             model.addAttribute("message", "Save Successful");
-        } catch(Exception e){
+        } catch (Exception e) {
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
@@ -93,11 +93,11 @@ public class WebController {
     }
 
     @PostMapping("/user/delete/{username}")
-    public String deleteUser(Model model, @PathVariable String username){
+    public String deleteUser(Model model, @PathVariable String username) {
         try {
             userService.deleteById(username);
             model.addAttribute("message", "Delete Successful");
-        } catch(RuntimeException e){
+        } catch (RuntimeException e) {
             model.addAttribute("error", e.getLocalizedMessage());
         }
         model.addAttribute("users", userService.findAll());
@@ -108,20 +108,20 @@ public class WebController {
     /* Types */
     /*----------------------------------------------------------------------------------------------------------------*/
     @GetMapping("/types")
-    public String showTypeList(Model model){
+    public String showTypeList(Model model) {
         model.addAttribute("types", typeService.findAll());
         return "types.html";
     }
 
 
     @GetMapping("/type/{typeshort}")
-    public String showType(Model model, @PathVariable String typeshort){
+    public String showType(Model model, @PathVariable String typeshort) {
         model.addAttribute("type", typeService.findById(typeshort));
         return "editType.html";
     }
 
     @GetMapping("/type")
-    public String showNewType(Model model){
+    public String showNewType(Model model) {
         Type type = new Type();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         type.setUser(userService.findById(authentication.getName()));
@@ -131,14 +131,14 @@ public class WebController {
     }
 
     @PostMapping("/type/update/{typeshort}")
-    public String updateType(Model model, @ModelAttribute("type") Type type, @PathVariable String typeshort){
-        if(typeService.existsId(type.getShort_name())){
+    public String updateType(Model model, @ModelAttribute("type") Type type, @PathVariable String typeshort) {
+        if (typeService.existsId(type.getShort_name())) {
             //Already exists
             Type typeold = typeService.findById(type.getShort_name());
             type.setUser(typeold.getUser());
             type.setShort_name(typeold.getShort_name());
             type.setDate(typeold.getDate());
-        } else{
+        } else {
             //Need to create new
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             type.setUser(userService.findById(authentication.getName()));
@@ -148,7 +148,7 @@ public class WebController {
         try {
             typeService.save(type);
             model.addAttribute("message", "Save Successful");
-        } catch(Exception e){
+        } catch (Exception e) {
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
@@ -158,11 +158,11 @@ public class WebController {
     }
 
     @PostMapping("/type/delete/{typeshort}")
-    public String deleteType(Model model, @PathVariable String typeshort){
+    public String deleteType(Model model, @PathVariable String typeshort) {
         try {
             typeService.deleteById(typeshort);
             model.addAttribute("message", "Delete Successful");
-        } catch(RuntimeException e){
+        } catch (RuntimeException e) {
             model.addAttribute("error", e.getLocalizedMessage());
         }
         model.addAttribute("types", typeService.findAll());
@@ -173,20 +173,20 @@ public class WebController {
     /* Tags */
     /*----------------------------------------------------------------------------------------------------------------*/
     @GetMapping("/tags")
-    public String showTagList(Model model){
+    public String showTagList(Model model) {
         model.addAttribute("tags", tagService.findAll());
         return "tags.html";
     }
 
 
     @GetMapping("/tag/{tag}")
-    public String showTag(Model model, @PathVariable String tag){
+    public String showTag(Model model, @PathVariable String tag) {
         model.addAttribute("tag", tagService.findById(tag));
         return "editTag.html";
     }
 
     @GetMapping("/tag")
-    public String showNewTag(Model model){
+    public String showNewTag(Model model) {
         Tag tag = new Tag();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         tag.setUser(userService.findById(authentication.getName()));
@@ -196,14 +196,14 @@ public class WebController {
     }
 
     @PostMapping("/tag/update/{tag_name}")
-    public String updateType(Model model, @ModelAttribute("tag") Tag tag, @PathVariable String tag_name){
-        if(tagService.existsId(tag.getTag())){
+    public String updateType(Model model, @ModelAttribute("tag") Tag tag, @PathVariable String tag_name) {
+        if (tagService.existsId(tag.getTag())) {
             //Already exists
             Tag tagold = tagService.findById(tag.getTag());
             tag.setUser(tagold.getUser());
             tag.setTag(tagold.getTag());
             tag.setDate(tagold.getDate());
-        } else{
+        } else {
             //Need to create new
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             tag.setUser(userService.findById(authentication.getName()));
@@ -213,7 +213,7 @@ public class WebController {
         try {
             tagService.save(tag);
             model.addAttribute("message", "Save Successful");
-        } catch(Exception e){
+        } catch (Exception e) {
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
@@ -223,11 +223,11 @@ public class WebController {
     }
 
     @PostMapping("/tag/delete/{tag}")
-    public String deleteTag(Model model, @PathVariable String tag){
+    public String deleteTag(Model model, @PathVariable String tag) {
         try {
             tagService.deleteById(tag);
             model.addAttribute("message", "Delete Successful");
-        } catch(RuntimeException e){
+        } catch (RuntimeException e) {
             model.addAttribute("error", e.getLocalizedMessage());
         }
         model.addAttribute("tags", tagService.findAll());
@@ -238,20 +238,20 @@ public class WebController {
     /* Sender */
     /*----------------------------------------------------------------------------------------------------------------*/
     @GetMapping("/senders")
-    public String showSenderList(Model model){
+    public String showSenderList(Model model) {
         model.addAttribute("senders", senderService.findAll());
         return "senders.html";
     }
 
 
     @GetMapping("/sender/{id}")
-    public String showTag(Model model, @PathVariable Integer id){
+    public String showTag(Model model, @PathVariable Integer id) {
         model.addAttribute("sender", senderService.findById(id));
         return "editSender.html";
     }
 
     @GetMapping("/sender")
-    public String showNewSender(Model model){
+    public String showNewSender(Model model) {
         Sender sender = new Sender();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         sender.setUser(userService.findById(authentication.getName()));
@@ -261,14 +261,14 @@ public class WebController {
     }
 
     @PostMapping("/sender/update/{id}")
-    public String updateSender(Model model, @ModelAttribute("sender") Sender sender, @PathVariable Integer id){
-        if(senderService.existsId(sender.getId())){
+    public String updateSender(Model model, @ModelAttribute("sender") Sender sender, @PathVariable Integer id) {
+        if (senderService.existsId(sender.getId())) {
             //Already exists
             Sender senderold = senderService.findById(sender.getId());
             sender.setUser(senderold.getUser());
             sender.setId(senderold.getId());
             sender.setDate(senderold.getDate());
-        } else{
+        } else {
             //Need to create new
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             sender.setUser(userService.findById(authentication.getName()));
@@ -278,7 +278,7 @@ public class WebController {
         try {
             senderService.save(sender);
             model.addAttribute("message", "Save Successful");
-        } catch(Exception e){
+        } catch (Exception e) {
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
@@ -288,11 +288,11 @@ public class WebController {
     }
 
     @PostMapping("/sender/delete/{id}")
-    public String deleteSender(Model model, @PathVariable Integer id){
+    public String deleteSender(Model model, @PathVariable Integer id) {
         try {
             senderService.deleteById(id);
             model.addAttribute("message", "Delete Successful");
-        } catch(RuntimeException e){
+        } catch (RuntimeException e) {
             model.addAttribute("error", e.getLocalizedMessage());
         }
         model.addAttribute("senders", senderService.findAll());

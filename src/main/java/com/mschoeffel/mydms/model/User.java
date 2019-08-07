@@ -8,28 +8,28 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @DynamicUpdate
 public class User {
 
     @Id
-    @Column(name="username", updatable=false)
+    @Column(name = "username", updatable = false)
     private String username;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="enabled")
+    @Column(name = "enabled")
     private Boolean enabled;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="date", updatable = false)
+    @Column(name = "date", updatable = false)
     private LocalDate date;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
     @OneToMany(mappedBy = "user")

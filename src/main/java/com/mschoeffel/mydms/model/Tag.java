@@ -7,18 +7,18 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="tag")
+@Table(name = "tag")
 @DynamicUpdate
 public class Tag {
 
     @Id
-    @Column(name="tag", updatable=false)
+    @Column(name = "tag", updatable = false)
     private String tag;
 
-    @Column(name="color")
+    @Column(name = "color")
     private String color;
 
-    @Column(name="text")
+    @Column(name = "text")
     private String text;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,7 +26,7 @@ public class Tag {
     private User user;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="date", updatable = false)
+    @Column(name = "date", updatable = false)
     private LocalDate date;
 
 

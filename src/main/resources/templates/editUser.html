@@ -1,170 +1,186 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
     <style>
-      .v-center {
-        display: flex;
-        align-items: center;
-      }
+        .v-center {
+            display: flex;
+            align-items: center;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
 
-  <!--BEGIN NAV-->
-  <div th:replace="fragments/header :: header">&nbsp;</div>
-  <!--END NAV-->
+<!--BEGIN NAV-->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<!--END NAV-->
 
-    <div class="container" style="max-width: 100%">
-      <div class="row">
+<div class="container" style="max-width: 100%">
+    <div class="row">
         <div class="col-xl-9 d-flex align-items-stretch" style="padding-top: 2em">
-          <div class="card" style="width: 100%">
-            <div class="card-header">
-              <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Actions</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Change password</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Andere aktion</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
-              </div>
-              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
-              </div>
-              <form th:action="@{/web/user/update/} + ${user.username}" method="POST">
-                <div class="form-row">
-                  <div class="col-lg-4 mb-3">
-                    <label for="username">User</label>
-                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" th:value="${user.username}" required>
-                  </div>
-                  <div class="col-lg-8 mb-3">
-                    <label for="email">E-Mail</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
-                      </div>
-                      <input type="email" class="form-control" placeholder="E-Mail" name="email" id="email" th:value="${user.email}" aria-describedby="inputGroupPrepend3">
+            <div class="card" style="width: 100%">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">Actions</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Change password</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Andere aktion</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
                     </div>
-                  </div>
-                </div>
-                <div class="form-row"><!--Only visible by new user-->
-                  <div class="col-lg-4 mb-3" th:if="${user.username} == null">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" th:value="${user.password}" required>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" th:value="${user.date}">
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Name" name="name" th:value="${user.name}">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-lg-6 mb-3 v-center">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="enabled" name="enabled" th:checked="${user.enabled}">
-                      <label class="custom-control-label" for="enabled">Active</label>
+                    <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
                     </div>
-                  </div>
+                    <form th:action="@{/web/user/update/} + ${user.username}" method="POST">
+                        <div class="form-row">
+                            <div class="col-lg-4 mb-3">
+                                <label for="username">User</label>
+                                <input type="text" class="form-control" placeholder="Username" id="username"
+                                       name="username" th:value="${user.username}" required>
+                            </div>
+                            <div class="col-lg-8 mb-3">
+                                <label for="email">E-Mail</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                                    </div>
+                                    <input type="email" class="form-control" placeholder="E-Mail" name="email"
+                                           id="email" th:value="${user.email}" aria-describedby="inputGroupPrepend3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row"><!--Only visible by new user-->
+                            <div class="col-lg-4 mb-3" th:if="${user.username} == null">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password"
+                                       name="password" th:value="${user.password}" required>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date" placeholder="2000-01-01"
+                                       th:value="${user.date}">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Name" name="name"
+                                       th:value="${user.name}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6 mb-3 v-center">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="enabled" name="enabled"
+                                           th:checked="${user.enabled}">
+                                    <label class="custom-control-label" for="enabled">Active</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <a th:href="@{/web/users}">
+                            <button class="btn btn-secondary" type="button">Cancel</button>
+                        </a>
+                        <div class="float-right">
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                Delete
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <br>
-                <button class="btn btn-primary" type="submit">Save</button>
-                <a th:href="@{/web/users}"><button class="btn btn-secondary" type="button">Cancel</button></a>
-                <div class="float-right">
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    Delete
-                  </button>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
         <div class="col-xl-3 d-flex align-items-stretch" style="padding-top: 2em">
-          <div class="card" style="width: 100%">
-            <div class="card-header">
-              <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Action</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Add Right WEB</a>
-                    <a class="dropdown-item" href="#">Add Right ADMIN</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Andere aktion</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div class="alert alert-success" role="alert">
-                  Erfolgeich abgemeldet
+            <div class="card" style="width: 100%">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">Action</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Add Right WEB</a>
+                                <a class="dropdown-item" href="#">Add Right ADMIN</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Andere aktion</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="alert alert-danger" role="alert">
-                  Fehler
+                <div class="card-body">
+                    <div class="alert alert-success" role="alert">
+                        Erfolgeich abgemeldet
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                        Fehler
+                    </div>
+                    <div class="table-responsive-md">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Right</th>
+                                <th scope="col">Insdate</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">WEB</th>
+                                <td>21.02.2019</td>
+                                <td><a href="#">
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ADMIN</th>
+                                <td>21.02.2019</td>
+                                <td><a href="#">
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-              <div class="table-responsive-md">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Right</th>
-                      <th scope="col">Insdate</th>
-                      <th scope="col">Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">WEB</th>
-                      <td>21.02.2019</td>
-                      <td><a href="#"><button class="btn btn-danger btn-sm">Delete</button></a></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">ADMIN</th>
-                      <td>21.02.2019</td>
-                      <td><a href="#"><button class="btn btn-danger btn-sm">Delete</button></a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Soll der Datensatz und das Dokument wirklich gelöscht werden?
-          </div>
-          <form th:action="@{/web/user/delete/} + ${user.username}" method="POST">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger">Delete</button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-          </form>
+            <div class="modal-body">
+                Soll der Datensatz und das Dokument wirklich gelöscht werden?
+            </div>
+            <form th:action="@{/web/user/delete/} + ${user.username}" method="POST">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
-  
-  </body>
-  <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
-  <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
-  <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
+</div>
+
+</body>
+<script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+<script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+<script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>

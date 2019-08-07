@@ -1,99 +1,108 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
     <style>
-      .v-center {
-        display: flex;
-        align-items: center;
-      }
+        .v-center {
+            display: flex;
+            align-items: center;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
 
-    <!--BEGIN NAV-->
-    <div th:replace="fragments/header :: header">&nbsp;</div>
-    <!--END NAV-->
+<!--BEGIN NAV-->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<!--END NAV-->
 
-    <div class="container" style="padding-top: 2em">
-      <div class="row">
+<div class="container" style="padding-top: 2em">
+    <div class="row">
         <div class="col-xl-12">
-          <div class="card">
-            <div class="card-header">
-              Edit Type
-            </div>
-            <div class="card-body">
-              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
-              </div>
-              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
-              </div>
-              <form th:action="@{/web/type/update/} + ${type.short_name}" method="POST">
-                <div class="form-row">
-                  <div class="col-lg-4 mb-3">
-                    <label for="name">Type</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Type" th:value="${type.name}" required>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                      <label for="short_name">Short</label>
-                      <input type="text" class="form-control" id="short_name" placeholder="Short" name="short_name" th:value="${type.short_name}" required>
+            <div class="card">
+                <div class="card-header">
+                    Edit Type
+                </div>
+                <div class="card-body">
+                    <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
                     </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="user">User</label>
-                    <input type="text" class="form-control" placeholder="User" id="user" th:value="${type.user.username}" disabled>
-                  </div>
+                    <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
+                    </div>
+                    <form th:action="@{/web/type/update/} + ${type.short_name}" method="POST">
+                        <div class="form-row">
+                            <div class="col-lg-4 mb-3">
+                                <label for="name">Type</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Type"
+                                       th:value="${type.name}" required>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="short_name">Short</label>
+                                <input type="text" class="form-control" id="short_name" placeholder="Short"
+                                       name="short_name" th:value="${type.short_name}" required>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="user">User</label>
+                                <input type="text" class="form-control" placeholder="User" id="user"
+                                       th:value="${type.user.username}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-8 mb-3">
+                                <label for="text">Text</label>
+                                <input type="text" class="form-control" id="text" name="text" placeholder="Text"
+                                       th:value="${type.text}" required>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date" placeholder="2000-01-01"
+                                       th:value="${type.date}" disabled>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <a th:href="@{/web/types}">
+                            <button class="btn btn-secondary" type="button">Cancel</button>
+                        </a>
+                        <div class="float-right">
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                Delete
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-row">
-                  <div class="col-lg-8 mb-3">
-                    <label for="text">Text</label>
-                    <input type="text" class="form-control" id="text" name="text" placeholder="Text" th:value="${type.text}" required>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" th:value="${type.date}" disabled>
-                  </div>
-                </div>
-                <br>
-                <button class="btn btn-primary" type="submit">Save</button>
-                <a th:href="@{/web/types}"><button class="btn btn-secondary" type="button">Cancel</button></a>
-                <div class="float-right">
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    Delete
-                  </button>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Soll der Datensatz und das Dokument wirklich gelöscht werden?
-          </div>
-          <form th:action="@{/web/type/delete/} + ${type.short_name}" method="POST">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger">Delete</button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-          </form>
+            <div class="modal-body">
+                Soll der Datensatz und das Dokument wirklich gelöscht werden?
+            </div>
+            <form th:action="@{/web/type/delete/} + ${type.short_name}" method="POST">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
-  
-  </body>
-  <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
-  <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
-  <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
+</div>
+
+</body>
+<script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+<script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+<script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>

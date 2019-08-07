@@ -17,7 +17,7 @@ public class AppConfig {
     private Environment env;
 
     @Bean(name = "securityDataSource")
-    public DataSource securityDataSource(){
+    public DataSource securityDataSource() {
 
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));

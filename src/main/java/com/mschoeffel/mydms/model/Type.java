@@ -8,18 +8,18 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="types")
+@Table(name = "types")
 @DynamicUpdate
 public class Type {
 
     @Id
-    @Column(name="short_name", updatable=false)
+    @Column(name = "short_name", updatable = false)
     private String short_name;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="text")
+    @Column(name = "text")
     private String text;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -27,7 +27,7 @@ public class Type {
     private User user;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="date", updatable = false)
+    @Column(name = "date", updatable = false)
     private LocalDate date;
 
 

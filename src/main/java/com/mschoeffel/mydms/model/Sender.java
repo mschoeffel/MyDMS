@@ -7,19 +7,19 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="sender")
+@Table(name = "sender")
 @DynamicUpdate
 public class Sender {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", updatable=false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="text")
+    @Column(name = "text")
     private String text;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -27,7 +27,7 @@ public class Sender {
     private User user;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="date", updatable = false)
+    @Column(name = "date", updatable = false)
     private LocalDate date;
 
 

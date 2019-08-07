@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(String username) {
-        Optional<User> user =  userRepository.findById(username);
+        Optional<User> user = userRepository.findById(username);
         return user.orElse(null);
     }
 
@@ -36,7 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean existsId(String username){ return userRepository.existsById(username); }
+    public boolean existsId(String username) {
+        return userRepository.existsById(username);
+    }
 
     @Override
     public void deleteById(String username) {

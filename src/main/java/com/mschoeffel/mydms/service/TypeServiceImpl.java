@@ -16,7 +16,7 @@ public class TypeServiceImpl implements TypeService {
     private TypeRepository typeRepository;
 
     @Autowired
-    public TypeServiceImpl(TypeRepository typeRepository){
+    public TypeServiceImpl(TypeRepository typeRepository) {
         this.typeRepository = typeRepository;
     }
 
@@ -28,12 +28,14 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public Type findById(String short_name) {
-        Optional<Type> type =  typeRepository.findById(short_name);
+        Optional<Type> type = typeRepository.findById(short_name);
         return type.orElse(null);
     }
 
     @Override
-    public boolean existsId(String short_name){ return typeRepository.existsById(short_name); }
+    public boolean existsId(String short_name) {
+        return typeRepository.existsById(short_name);
+    }
 
     @Override
     public Type save(Type type) {

@@ -16,7 +16,7 @@ public class TagServiceImpl implements TagService {
     private TagRepository tagRepository;
 
     @Autowired
-    public TagServiceImpl(TagRepository tagRepository){
+    public TagServiceImpl(TagRepository tagRepository) {
         this.tagRepository = tagRepository;
     }
 
@@ -28,12 +28,14 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag findById(String tag) {
-        Optional<Tag> type =  tagRepository.findById(tag);
+        Optional<Tag> type = tagRepository.findById(tag);
         return type.orElse(null);
     }
 
     @Override
-    public boolean existsId(String tag){ return tagRepository.existsById(tag); }
+    public boolean existsId(String tag) {
+        return tagRepository.existsById(tag);
+    }
 
     @Override
     public Tag save(Tag tag) {

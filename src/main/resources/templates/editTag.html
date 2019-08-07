@@ -1,103 +1,113 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
     <style>
-      .v-center {
-        display: flex;
-        align-items: center;
-      }
+        .v-center {
+            display: flex;
+            align-items: center;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
 
-  <!--BEGIN NAV-->
-  <div th:replace="fragments/header :: header">&nbsp;</div>
-  <!--END NAV-->
+<!--BEGIN NAV-->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<!--END NAV-->
 
-    <div class="container" style="padding-top: 2em">
-      <div class="row">
+<div class="container" style="padding-top: 2em">
+    <div class="row">
         <div class="col-xl-12">
-          <div class="card">
-            <div class="card-header">
-              Edit Tag
+            <div class="card">
+                <div class="card-header">
+                    Edit Tag
+                </div>
+                <div class="card-body">
+                    <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
+                    </div>
+                    <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
+                    </div>
+                    <form th:action="@{/web/tag/update/} + ${tag.tag}" method="POST">
+                        <div class="form-row">
+                            <div class="col-lg-4 mb-3">
+                                <label for="tag">Tag</label>
+                                <input type="text" class="form-control" id="tag" name="tag" placeholder="Tag"
+                                       th:value="${tag.tag}" required>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="color">Color</label>
+                                <select class="custom-select" id="color" name="color">
+                                    <option selected>Choose...</option>
+                                    <option value="badge-danger" th:selected="${tag.color == 'badge-danger'}">Red
+                                    </option>
+                                    <option value="badge-primary" th:selected="${tag.color == 'badge-primary'}">Blue
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="user">User</label>
+                                <input type="text" class="form-control" id="user" placeholder="User"
+                                       th:value="${tag.user.username}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-8 mb-3">
+                                <label for="text">Text</label>
+                                <input type="text" class="form-control" id="text" name="text" placeholder="Text"
+                                       th:value="${tag.text}">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date" placeholder="2000-01-01"
+                                       th:value="${tag.date}" disabled>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <a th:href="@{/web/tags}">
+                            <button class="btn btn-secondary" type="button">Cancel</button>
+                        </a>
+                        <div class="float-right">
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                Delete
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="card-body">
-              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
-              </div>
-              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
-              </div>
-              <form th:action="@{/web/tag/update/} + ${tag.tag}" method="POST">
-                <div class="form-row">
-                  <div class="col-lg-4 mb-3">
-                    <label for="tag">Tag</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="Tag" th:value="${tag.tag}" required>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="color">Color</label>
-                    <select class="custom-select" id="color" name="color">
-                      <option selected>Choose...</option>
-                      <option value="badge-danger" th:selected="${tag.color == 'badge-danger'}">Red</option>
-                      <option value="badge-primary" th:selected="${tag.color == 'badge-primary'}">Blue</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="user">User</label>
-                    <input type="text" class="form-control" id="user" placeholder="User" th:value="${tag.user.username}" disabled>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-lg-8 mb-3">
-                    <label for="text">Text</label>
-                    <input type="text" class="form-control" id="text" name="text" placeholder="Text" th:value="${tag.text}">
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" th:value="${tag.date}" disabled>
-                  </div>
-                </div>
-                <br>
-                <button class="btn btn-primary" type="submit">Save</button>
-                <a th:href="@{/web/tags}"><button class="btn btn-secondary" type="button">Cancel</button></a>
-                <div class="float-right">
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    Delete
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Soll der Datensatz und das Dokument wirklich gelöscht werden?
-          </div>
-          <form th:action="@{/web/tag/delete/} + ${tag.tag}" method="POST">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger">Delete</button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-          </form>
+            <div class="modal-body">
+                Soll der Datensatz und das Dokument wirklich gelöscht werden?
+            </div>
+            <form th:action="@{/web/tag/delete/} + ${tag.tag}" method="POST">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
-  
-  </body>
-  <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
-  <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
-  <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
+</div>
+
+</body>
+<script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+<script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+<script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>

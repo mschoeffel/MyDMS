@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SecurityController {
 
     @GetMapping("/login")
-    public String showLogin(){
+    public String showLogin() {
         return "login";
     }
 
@@ -19,13 +19,13 @@ public class SecurityController {
     }
 
     @GetMapping("/accessDenied")
-    public String showAccessDenied(Model model){
+    public String showAccessDenied(Model model) {
         model.addAttribute("accessError", true);
         return "login";
     }
 
     @GetMapping("/logout-success")
-    public String showLogout(Model model){
+    public String showLogout(Model model) {
         model.addAttribute("logoutSuccess", true);
         return "login";
     }

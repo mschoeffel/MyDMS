@@ -16,7 +16,7 @@ public class SenderServiceImpl implements SenderService {
     private SenderRepository senderRepository;
 
     @Autowired
-    public SenderServiceImpl(SenderRepository senderRepository){
+    public SenderServiceImpl(SenderRepository senderRepository) {
         this.senderRepository = senderRepository;
     }
 
@@ -28,12 +28,14 @@ public class SenderServiceImpl implements SenderService {
 
     @Override
     public Sender findById(int id) {
-        Optional<Sender> sender =  senderRepository.findById(id);
+        Optional<Sender> sender = senderRepository.findById(id);
         return sender.orElse(null);
     }
 
     @Override
-    public boolean existsId(int id){ return senderRepository.existsById(id); }
+    public boolean existsId(int id) {
+        return senderRepository.existsById(id);
+    }
 
     @Override
     public Sender save(Sender sender) {

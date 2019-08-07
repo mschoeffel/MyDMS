@@ -1,67 +1,69 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
-  </head>
-  <body>
+</head>
+<body>
 
-    <!--BEGIN NAV-->
-    <div th:replace="fragments/header :: header">&nbsp;</div>
-    <!--END NAV-->
+<!--BEGIN NAV-->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<!--END NAV-->
 
-    <!--BEGIN LIST-->
-    <div class="container" style="padding-top: 2em;">
-      <div class="row">
+<!--BEGIN LIST-->
+<div class="container" style="padding-top: 2em;">
+    <div class="row">
         <div class="col-sm-12">
-          <div class="card">
-            <div class="card-header">
-              <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                  <a class="nav-link active" th:href="@{/web/user/}">New User</a>
-                </li>
-              </ul>
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/web/user/}">New User</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
+                    </div>
+                    <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
+                    </div>
+                    <div class="table-responsive-md">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">User</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Active</th>
+                                <th scope="col">Open</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="user : ${users}">
+                                <tr>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${user.name}"></td>
+                                    <td th:text="${user.date}"></td>
+                                    <td th:if="${user.enabled}">YES</td>
+                                    <td th:if="!${user.enabled}">NO</td>
+                                    <td><a th:href="@{/web/user/} + ${user.username}">
+                                        <button class="btn btn-primary btn-sm">Open</button>
+                                    </a></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
-              </div>
-              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
-              </div>
-              <div class="table-responsive-md">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">User</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Active</th>
-                      <th scope="col">Open</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <th:block th:each="user : ${users}">
-                    <tr>
-                      <td th:text="${user.username}"></td>
-                      <td th:text="${user.name}"></td>
-                      <td th:text="${user.date}"></td>
-                      <td th:if="${user.enabled}">YES</td>
-                      <td th:if="!${user.enabled}">NO</td>
-                      <td><a th:href="@{/web/user/} + ${user.username}"><button class="btn btn-primary btn-sm">Open</button></a></td>
-                    </tr>
-                    </th:block>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!--END LIST-->
-  
-  </body>
-  <script src="../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
-  <script src="../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
-  <script src="../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
+</div>
+<!--END LIST-->
+
+</body>
+<script src="../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+<script src="../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+<script src="../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>
