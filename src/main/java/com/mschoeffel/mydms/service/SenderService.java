@@ -9,12 +9,12 @@ public interface SenderService {
 
     public List<Sender> findAll();
 
-    public Sender findById(Integer id);
+    public Sender findById(int id);
 
     public Sender save(Sender sender);
 
-    public boolean existsId(Integer id);
+    public boolean existsId(int id);
 
-    public void deleteById(Integer id);
+    public void deleteById(int id);
 
 }

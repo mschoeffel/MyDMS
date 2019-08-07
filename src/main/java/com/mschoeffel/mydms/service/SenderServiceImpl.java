@@ -27,13 +27,13 @@ public class SenderServiceImpl implements SenderService {
     }
 
     @Override
-    public Sender findById(Integer id) {
+    public Sender findById(int id) {
         Optional<Sender> sender =  senderRepository.findById(id);
         return sender.orElse(null);
     }
 
     @Override
-    public boolean existsId(Integer id){ return senderRepository.existsById(id); }
+    public boolean existsId(int id){ return senderRepository.existsById(id); }
 
     @Override
     public Sender save(Sender sender) {
@@ -41,7 +41,7 @@ public class SenderServiceImpl implements SenderService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(int id) {
         senderRepository.deleteById(id);
     }
 }

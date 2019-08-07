@@ -12,8 +12,9 @@ import java.time.LocalDate;
 public class Sender {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id", updatable=false)
-    private Integer id;
+    private int id;
 
     @Column(name="name")
     private String name;
@@ -21,7 +22,7 @@ public class Sender {
     @Column(name="text")
     private String text;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user", updatable = false)
     private User user;
 
@@ -33,11 +34,11 @@ public class Sender {
     public Sender() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

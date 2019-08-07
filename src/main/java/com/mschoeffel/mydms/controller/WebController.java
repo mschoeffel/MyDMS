@@ -295,7 +295,7 @@ public class WebController {
         } catch(RuntimeException e){
             model.addAttribute("error", e.getLocalizedMessage());
         }
-        model.addAttribute("sender", senderService.findAll());
+        model.addAttribute("senders", senderService.findAll());
         return "senders.html";
     }
 

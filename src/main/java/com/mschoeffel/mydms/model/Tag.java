@@ -21,7 +21,7 @@ public class Tag {
     @Column(name="text")
     private String text;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user", updatable = false)
     private User user;
 

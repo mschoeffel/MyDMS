@@ -32,8 +32,7 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Type> types;
 
     public User() {
