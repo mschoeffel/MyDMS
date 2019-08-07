@@ -1,8 +1,10 @@
 package com.mschoeffel.mydms.controller;
 
+import com.mschoeffel.mydms.model.Sender;
 import com.mschoeffel.mydms.model.Tag;
 import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.model.User;
+import com.mschoeffel.mydms.service.SenderService;
 import com.mschoeffel.mydms.service.TagService;
 import com.mschoeffel.mydms.service.TypeService;
 import com.mschoeffel.mydms.service.UserService;
@@ -21,16 +23,18 @@ public class WebController {
     private UserService userService;
     private TypeService typeService;
     private TagService tagService;
+    private SenderService senderService;
 
 
     /*----------------------------------------------------------------------------------------------------------------*/
     /* Home */
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    public WebController(UserService userService, TypeService typeService, TagService tagService){
+    public WebController(UserService userService, TypeService typeService, TagService tagService, SenderService senderService){
         this.userService = userService;
         this.typeService = typeService;
         this.tagService = tagService;
+        this.senderService = senderService;
     }
 
     @GetMapping("/home")
@@ -152,9 +156,7 @@ public class WebController {
         model.addAttribute("type", typeService.findById(type.getShort_name()));
         return "editType.html";
     }
-
-
-
+    
     @PostMapping("/type/delete/{typeshort}")
     public String deleteType(Model model, @PathVariable String typeshort){
         try {
@@ -220,8 +222,6 @@ public class WebController {
         return "editTag.html";
     }
 
-
-
     @PostMapping("/tag/delete/{tag}")
     public String deleteTag(Model model, @PathVariable String tag){
         try {
@@ -232,6 +232,71 @@ public class WebController {
         }
         model.addAttribute("tags", tagService.findAll());
         return "tags.html";
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Sender */
+    /*----------------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/senders")
+    public String showSenderList(Model model){
+        model.addAttribute("senders", senderService.findAll());
+        return "senders.html";
+    }
+
+
+    @GetMapping("/sender/{id}")
+    public String showTag(Model model, @PathVariable Integer id){
+        model.addAttribute("sender", senderService.findById(id));
+        return "editSender.html";
+    }
+
+    @GetMapping("/sender")
+    public String showNewSender(Model model){
+        Sender sender = new Sender();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        sender.setUser(userService.findById(authentication.getName()));
+        sender.setDate(LocalDate.now());
+        model.addAttribute("sender", sender);
+        return "editSender.html";
+    }
+
+    @PostMapping("/sender/update/{id}")
+    public String updateSender(Model model, @ModelAttribute("sender") Sender sender, @PathVariable Integer id){
+        if(senderService.existsId(sender.getId())){
+            //Already exists
+            Sender senderold = senderService.findById(sender.getId());
+            sender.setUser(senderold.getUser());
+            sender.setId(senderold.getId());
+            sender.setDate(senderold.getDate());
+        } else{
+            //Need to create new
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            sender.setUser(userService.findById(authentication.getName()));
+            sender.setDate(LocalDate.now());
+        }
+
+        try {
+            senderService.save(sender);
+            model.addAttribute("message", "Save Successful");
+        } catch(Exception e){
+            model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
+        }
+
+
+        model.addAttribute("sender", senderService.findById(sender.getId()));
+        return "editSender.html";
+    }
+
+    @PostMapping("/sender/delete/{id}")
+    public String deleteSender(Model model, @PathVariable Integer id){
+        try {
+            senderService.deleteById(id);
+            model.addAttribute("message", "Delete Successful");
+        } catch(RuntimeException e){
+            model.addAttribute("error", e.getLocalizedMessage());
+        }
+        model.addAttribute("sender", senderService.findAll());
+        return "senders.html";
     }
 
 }
