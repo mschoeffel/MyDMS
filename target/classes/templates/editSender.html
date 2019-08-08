@@ -1,146 +1,157 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
     <style>
-      .v-center {
-        display: flex;
-        align-items: center;
-      }
+        .v-center {
+            display: flex;
+            align-items: center;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
 
-    <!--BEGIN NAV-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+<!--BEGIN NAV-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                New Document
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Rechnung</a>
-                <a class="dropdown-item" href="#">Kontoauszug</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Tankrechnung</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Settings
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    New Document
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Tags</a>
-                  <a class="dropdown-item" href="#">Adresses</a>
-                  <a class="dropdown-item" href="#">Types</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">User</a>
+                    <a class="dropdown-item" href="#">Rechnung</a>
+                    <a class="dropdown-item" href="#">Kontoauszug</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Tankrechnung</a>
                 </div>
-              </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Tags</a>
+                    <a class="dropdown-item" href="#">Adresses</a>
+                    <a class="dropdown-item" href="#">Types</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">User</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search ID" aria-label="Search ID">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+        </form>
 
-          <form class="form-inline my-2 my-lg-0" style="padding-left: 5em">
+        <form class="form-inline my-2 my-lg-0" style="padding-left: 5em">
             <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
-          </form>
-        </div>
-      </nav>
-    <!--END NAV-->
+        </form>
+    </div>
+</nav>
+<!--END NAV-->
 
-    <div class="container" style="padding-top: 2em">
-      <div class="row">
+<div class="container" style="padding-top: 2em">
+    <div class="row">
         <div class="col-xl-12">
-          <div class="card">
-            <div class="card-header">
-              Edit Sender
+            <div class="card">
+                <div class="card-header">
+                    Edit Sender
+                </div>
+                <div class="card-body">
+                    <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
+                    </div>
+                    <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
+                    </div>
+                    <form th:action="@{/web/sender/update/} + ${sender.id}" method="POST">
+                        <div class="form-row">
+                            <div class="col-lg-4 mb-3">
+                                <label for="id">ID</label>
+                                <input type="text" class="form-control" id="id" th:value="${sender.id}" disabled>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                                       th:value="${sender.name}" required>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="user">User</label>
+                                <input type="text" class="form-control" id="user" placeholder="User"
+                                       th:value="${sender.user.username}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-8 mb-3">
+                                <label for="text">Text</label>
+                                <input type="text" class="form-control" id="text" name="text" placeholder="Text"
+                                       th:value="${sender.text}" required>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date" placeholder="2000-01-01"
+                                       th:value="${sender.date}" disabled>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <a th:href="@{/web/senders}">
+                            <button class="btn btn-secondary" type="button">Cancel</button>
+                        </a>
+                        <div class="float-right">
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                Delete
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="card-body">
-              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
-              </div>
-              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
-              </div>
-              <form th:action="@{/web/sender/update/} + ${sender.id}" method="POST">
-                <div class="form-row">
-                  <div class="col-lg-4 mb-3">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" th:value="${sender.id}" disabled>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Name" th:value="${sender.name}" required>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="user">User</label>
-                    <input type="text" class="form-control" id="user" placeholder="User" th:value="${sender.user.username}" disabled>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-lg-8 mb-3">
-                    <label for="text">Text</label>
-                    <input type="text" class="form-control" id="text" name="text" placeholder="Text" th:value="${sender.text}" required>
-                  </div>
-                  <div class="col-lg-4 mb-3">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="2000-01-01" th:value="${sender.date}" disabled>
-                  </div>
-                </div>
-                <br>
-                <button class="btn btn-primary" type="submit">Save</button>
-                <a th:href="@{/web/senders}"><button class="btn btn-secondary" type="button">Cancel</button></a>
-                <div class="float-right">
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    Delete
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Soll der Datensatz und das Dokument wirklich gelöscht werden?
-          </div>
-          <form th:action="@{/web/sender/delete/} + ${sender.id}" method="POST">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger">Delete</button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-          </form>
+            <div class="modal-body">
+                Soll der Datensatz und das Dokument wirklich gelöscht werden?
+            </div>
+            <form th:action="@{/web/sender/delete/} + ${sender.id}" method="POST">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
-  
-  </body>
-  <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
-  <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
-  <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
+</div>
+
+</body>
+<script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+<script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+<script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>

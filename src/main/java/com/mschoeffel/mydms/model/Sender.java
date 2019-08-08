@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "sender")
@@ -30,6 +31,8 @@ public class Sender {
     @Column(name = "date", updatable = false)
     private LocalDate date;
 
+    @OneToMany(mappedBy = "sender")
+    private List<Document> documents;
 
     public Sender() {
     }
@@ -72,5 +75,13 @@ public class Sender {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "tag")
@@ -29,6 +30,8 @@ public class Tag {
     @Column(name = "date", updatable = false)
     private LocalDate date;
 
+    @ManyToMany(mappedBy = "tags")
+    List<Document> documents;
 
     public Tag() {
     }

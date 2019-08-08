@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "types")
@@ -29,6 +30,9 @@ public class Type {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date", updatable = false)
     private LocalDate date;
+
+    @OneToMany(mappedBy = "type")
+    private List<Document> documents;
 
 
     public Type() {

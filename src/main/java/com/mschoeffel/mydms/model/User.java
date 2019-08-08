@@ -35,6 +35,15 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Type> types;
 
+    @OneToMany(mappedBy = "user")
+    private List<Document> documents;
+
+    @OneToMany(mappedBy = "user")
+    private List<Sender> senders;
+
+    @OneToMany(mappedBy = "user")
+    private List<Tag> tags;
+
     public User() {
     }
 
@@ -84,5 +93,37 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Type> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<Type> types) {
+        this.types = types;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    public List<Sender> getSenders() {
+        return senders;
+    }
+
+    public void setSenders(List<Sender> senders) {
+        this.senders = senders;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
