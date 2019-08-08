@@ -7,79 +7,13 @@
   </head>
   <body>
 
-    <!--BEGIN NAV-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                New Document
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Rechnung</a>
-                <a class="dropdown-item" href="#">Kontoauszug</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Tankrechnung</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Settings
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Tags</a>
-                  <a class="dropdown-item" href="#">Adresses</a>
-                  <a class="dropdown-item" href="#">Types</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">User</a>
-                </div>
-              </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
-          </form>
-        </div>
-      </nav>
-    <!--END NAV-->
+  <!--BEGIN NAV-->
+  <div th:replace="fragments/header :: header">&nbsp;</div>
+  <!--END NAV-->
 
-    <!--BEGIN SEARCH-->
-    <div class="container" style="padding-top: 2em">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card">
-              <div class="card-body">
-                  <div class="input-group">
-                      <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">ID</a>
-                          <a class="dropdown-item" href="#">Titel</a>
-                          <a class="dropdown-item" href="#">Beschreibung</a>
-                          <a class="dropdown-item" href="#">Absender</a>
-                          <div role="separator" class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Tags</a>
-                          <a class="dropdown-item" href="#">Datum</a>
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!--END SEARCH-->
+  <!--BEGIN NAV-->
+  <div th:replace="fragments/search :: search">&nbsp;</div>
+  <!--END NAV-->
 
     <!--BEGIN LIST-->
     <div class="container" style="padding-top: 2em; max-width: 100%;">
@@ -128,15 +62,19 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <th:block th:each="document : ${documents}">
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Rechnung</td>
-                      <td>Das ist der Titel</td>
-                      <td>Hier eine kurze beschreibung</td>
-                      <td>21.02.2019</td>
-                      <td><span class="badge badge-pill badge-danger">Primary</span> <span class="badge badge-pill badge-dark">Primary</span></td>
-                      <td><a href="#"><button class="btn btn-primary btn-sm">Open</button></a></td>
+                      <td th:text="${document.number}"></td>
+                      <td th:text="${document.title}"></td>
+                      <td th:text="${document.text}"></td>
+                      <td th:text="${document.user.username}"></td>
+                      <td th:text="${document.date}"></td>
+                      <td><th:block th:each="tag : ${document.tags}"><span class="badge badge-pill" th:class="${tag.color}" th:value="${tag.tag}"></span></th:block></td>
+                      <td><a th:href="@{/web/document/} + ${document.id}">
+                        <button class="btn btn-primary btn-sm">Open</button>
+                      </a></td>
                     </tr>
+                  </th:block>
                     <tr>
                       <th scope="row">2</th>
                       <td>Rechnung</td>

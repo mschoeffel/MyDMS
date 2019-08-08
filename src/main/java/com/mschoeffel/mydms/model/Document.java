@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "document")
+@Table(name = "documents")
 @DynamicUpdate
 public class Document {
 

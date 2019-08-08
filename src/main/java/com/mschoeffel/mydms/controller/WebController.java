@@ -4,10 +4,7 @@ import com.mschoeffel.mydms.model.Sender;
 import com.mschoeffel.mydms.model.Tag;
 import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.model.User;
-import com.mschoeffel.mydms.service.SenderService;
-import com.mschoeffel.mydms.service.TagService;
-import com.mschoeffel.mydms.service.TypeService;
-import com.mschoeffel.mydms.service.UserService;
+import com.mschoeffel.mydms.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,21 +21,24 @@ public class WebController {
     private TypeService typeService;
     private TagService tagService;
     private SenderService senderService;
+    private DocumentService documentService;
 
 
     /*----------------------------------------------------------------------------------------------------------------*/
     /* Home */
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    public WebController(UserService userService, TypeService typeService, TagService tagService, SenderService senderService) {
+    public WebController(UserService userService, TypeService typeService, TagService tagService, SenderService senderService, DocumentService documentService) {
         this.userService = userService;
         this.typeService = typeService;
         this.tagService = tagService;
         this.senderService = senderService;
+        this.documentService = documentService;
     }
 
     @GetMapping("/home")
-    public String showHome() {
+    public String showHome(Model model) {
+        model.addAttribute("documents", documentService.findAll());
         return "list.html";
     }
 
@@ -298,5 +298,6 @@ public class WebController {
         model.addAttribute("senders", senderService.findAll());
         return "senders.html";
     }
+
 
 }
