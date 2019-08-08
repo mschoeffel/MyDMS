@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "documents")
@@ -48,13 +49,13 @@ public class Document {
     @Column(name = "file", updatable = false)
     private String file;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "documents_tag",
             joinColumns = { @JoinColumn(name = "document") },
             inverseJoinColumns = { @JoinColumn(name = "tag") }
     )
-    List<Document> tags;
+    private List<Tag> tags;
 
     public Document() {
     }
@@ -139,11 +140,11 @@ public class Document {
         this.file = file;
     }
 
-    public List<Document> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Document> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 }

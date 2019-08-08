@@ -1,9 +1,6 @@
 package com.mschoeffel.mydms.controller;
 
-import com.mschoeffel.mydms.model.Sender;
-import com.mschoeffel.mydms.model.Tag;
-import com.mschoeffel.mydms.model.Type;
-import com.mschoeffel.mydms.model.User;
+import com.mschoeffel.mydms.model.*;
 import com.mschoeffel.mydms.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -297,6 +294,66 @@ public class WebController {
         }
         model.addAttribute("senders", senderService.findAll());
         return "senders.html";
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Documents */
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+
+    @GetMapping("/document/{id}")
+    public String showDocument(Model model, @PathVariable Integer id) {
+        model.addAttribute("document", documentService.findById(id));
+        return "editDocument.html";
+    }
+
+    @GetMapping("/document")
+    public String showNewDocument(Model model) {
+        Document document = new Document();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        document.setUser(userService.findById(authentication.getName()));
+        document.setDate(LocalDate.now());
+        model.addAttribute("document", document);
+        return "editDocument.html";
+    }
+
+    @PostMapping("/document/update/{id}")
+    public String updateDocument(Model model, @ModelAttribute("document") Document document, @PathVariable Integer id) {
+        if (documentService.existsId(document.getId())) {
+            //Already exists
+            Document documentold = documentService.findById(document.getId());
+            document.setUser(documentold.getUser());
+            document.setId(documentold.getId());
+            document.setDate(documentold.getDate());
+        } else {
+            //Need to create new
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            document.setUser(userService.findById(authentication.getName()));
+            document.setDate(LocalDate.now());
+        }
+
+        try {
+            documentService.save(document);
+            model.addAttribute("message", "Save Successful");
+        } catch (Exception e) {
+            model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
+        }
+
+
+        model.addAttribute("document", documentService.findById(document.getId()));
+        return "editDocument.html";
+    }
+
+    @PostMapping("/document/delete/{id}")
+    public String deleteDocument(Model model, @PathVariable Integer id) {
+        try {
+            documentService.deleteById(id);
+            model.addAttribute("message", "Delete Successful");
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getLocalizedMessage());
+        }
+        model.addAttribute("documents", documentService.findAll());
+        return "list.html";
     }
 
 

@@ -69,7 +69,7 @@
                       <td th:text="${document.text}"></td>
                       <td th:text="${document.user.username}"></td>
                       <td th:text="${document.date}"></td>
-                      <td><th:block th:each="tag : ${document.tags}"><span class="badge badge-pill" th:class="${tag.color}" th:value="${tag.tag}"></span></th:block></td>
+                      <td><th:block th:each="tag : ${document.tags}"><span th:class="'badge badge-pill ' + ${tag.color}" th:text="${tag.tag}"></span></th:block></td>
                       <td><a th:href="@{/web/document/} + ${document.id}">
                         <button class="btn btn-primary btn-sm">Open</button>
                       </a></td>

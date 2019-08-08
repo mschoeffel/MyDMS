@@ -31,7 +31,7 @@ public class Tag {
     private LocalDate date;
 
     @ManyToMany(mappedBy = "tags")
-    List<Document> documents;
+    private List<Document> documents;
 
     public Tag() {
     }
@@ -74,5 +74,13 @@ public class Tag {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
     }
 }

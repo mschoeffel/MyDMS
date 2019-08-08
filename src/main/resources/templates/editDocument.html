@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html>
   <head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
-    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
     <style>
       .v-center {
         display: flex;
@@ -85,69 +86,40 @@
               </ul>
             </div>
             <div class="card-body">
-              <div class="alert alert-success" role="alert">
-                Erfolgeich abgemeldet
+              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
               </div>
-              <div class="alert alert-danger" role="alert">
-                Fehler
+              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
               </div>
-              <form>
+              <form th:action="@{/web/document/update/} + ${document.id}" method="POST">
                 <div class="form-row">
                   <div class="col-lg-4 mb-3">
-                    <label for="validationServer01">Number</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" value="R-12345678" disabled>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="number">Number</label>
+                    <input type="text" class="form-control" id="number" th:value="${document.number}" disabled>
                   </div>
                   <div class="col-lg-4 mb-3">
-                    <label for="inlineFormCustomSelect">Type</label>
-                    <select class="custom-select is-valid" id="inlineFormCustomSelect" disabled>
-                      <option selected>Choose...</option>
-                      <option value="1" selected>Rechnung</option>
-                      <option value="2">Blanko</option>
-                      <option value="3">???</option>
-                    </select>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" id="type" th:value="${document.type.name}" disabled>
                   </div>
                   <div class="col-lg-4 mb-3">
-                    <label for="inlineFormCustomSelect">Sender</label>
-                    <select class="custom-select is-valid" id="inlineFormCustomSelect" disabled>
-                      <option selected>Choose...</option>
-                      <option value="1" selected>Finanzamt</option>
-                      <option value="2">Bank</option>
-                      <option value="3">???</option>
-                    </select>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="sender">Sender</label>
+                    <input type="text" class="form-control" id="sender" th:value="${document.sender.name}" disabled>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="col-lg-9 mb-3">
-                    <label for="validationServer03">Title</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="Title" value="Die erste Abrechnung 2019" required>
-                    <div class="invalid-feedback">
-                      Please provide a valid city.
-                    </div>
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control " id="title" name="title" placeholder="Title" th:value="${document.title}" required>
                   </div>
                   <div class="col-lg-3 mb-3">
-                    <label for="validationServer04">Date</label>
-                    <input type="date" class="form-control is-invalid" id="validationServer04" placeholder="2000-01-01" value="2019-05-01" disabled>
-                    <div class="invalid-feedback">
-                      Please provide a valid state.
-                    </div>
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control" id="date" placeholder="2000-01-01"
+                           th:value="${document.date}" disabled>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="col-lg-12 mb-3">
-                    <label for="validationServer03">Text</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="Text" value="Hier steht dann noch zusätzlicher Text zu dem Dokument" required>
-                    <div class="invalid-feedback">
-                      Please provide a valid city.
-                    </div>
+                    <label for="text">Text</label>
+                    <input type="text" class="form-control" id="text" name="text" placeholder="Text" th:value="${document.text}" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -161,21 +133,15 @@
                   </div>
                   <div class="col-lg-3 mb-3"></div>
                   <div class="col-lg-3 mb-3">
-                    <label for="inlineFormCustomSelect">User</label>
-                    <select class="custom-select is-valid" id="inlineFormCustomSelect" disabled>
-                      <option selected>Choose...</option>
-                      <option value="1" selected>mschoeffel</option>
-                      <option value="2">gmalchar</option>
-                      <option value="3">???</option>
-                    </select>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
+                    <label for="user">User</label>
+                    <input type="text" class="form-control" id="user" placeholder="User" th:value="${document.user.username}" disabled>
                   </div>
                 </div>
                 <br>
                 <button class="btn btn-primary" type="submit">Save</button>
-                <button class="btn btn-secondary" type="submit">Cancel</button>
+                <a th:href="@{/web/senders}">
+                  <button class="btn btn-secondary" type="button">Cancel</button>
+                </a>
                 <div class="float-right">
                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                     Delete
@@ -202,12 +168,10 @@
               </ul>
             </div>
             <div class="card-body">
-              <div class="alert alert-success" role="alert">
-                  Erfolgeich abgemeldet
-                </div>
-                <div class="alert alert-danger" role="alert">
-                  Fehler
-                </div>
+              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
+              </div>
+              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
+              </div>
               <div class="table-responsive-md">
                 <table class="table table-striped">
                   <thead>
@@ -218,11 +182,15 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <th:block th:each="tag : ${document.tags}">
                     <tr>
-                      <th scope="row">WEB</th>
-                      <td>21.02.2019</td>
-                      <td><a href="#"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+                      <td th:text="${tag.tag}"></td>
+                      <td th:text="${tag.date}"></td>
+                      <td><a th:href="@{/document/removeTag/} + ${tag.tag}">
+                        <button class="btn  btn-danger btn-sm">Delete</button>
+                      </a></td>
                     </tr>
+                  </th:block>
                     <tr>
                       <th scope="row">ADMIN</th>
                       <td>21.02.2019</td>
@@ -250,16 +218,18 @@
           <div class="modal-body">
             Soll der Datensatz und das Dokument wirklich gelöscht werden?
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </div>
+          <form th:action="@{/web/document/delete/} + ${document.id}" method="POST">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   
   </body>
-  <script src="lib/js/jquery.js"></script>
-  <script src="lib/js/popper.js"></script>
-  <script src="lib/js/bootstrap.min.js"></script>
+  <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+  <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+  <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>
