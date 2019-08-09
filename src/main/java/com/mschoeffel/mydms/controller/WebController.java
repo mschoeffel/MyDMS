@@ -304,6 +304,7 @@ public class WebController {
     @GetMapping("/document/{id}")
     public String showDocument(Model model, @PathVariable Integer id) {
         model.addAttribute("document", documentService.findById(id));
+        model.addAttribute("tags", tagService.findAll());
         return "editDocument.html";
     }
 
@@ -314,6 +315,7 @@ public class WebController {
         document.setUser(userService.findById(authentication.getName()));
         document.setDate(LocalDate.now());
         model.addAttribute("document", document);
+        model.addAttribute("tags", tagService.findAll());
         return "editDocument.html";
     }
 
@@ -339,8 +341,8 @@ public class WebController {
             model.addAttribute("error", "Error occurred: " + e.getLocalizedMessage());
         }
 
-
         model.addAttribute("document", documentService.findById(document.getId()));
+        model.addAttribute("tags", tagService.findAll());
         return "editDocument.html";
     }
 
@@ -354,6 +356,20 @@ public class WebController {
         }
         model.addAttribute("documents", documentService.findAll());
         return "list.html";
+    }
+
+    @GetMapping("/document/addTag/{id}/{tag}")
+    public String addTagToDocument(Model model, @PathVariable Integer id, @PathVariable String tag){
+        Document documentobj = documentService.findById(id);
+        Tag tagobj = tagService.findById(tag);
+        documentobj.addTag(tagobj);
+        try {
+            documentService.save(documentobj);
+            model.addAttribute("tag_message", "Save Successful");
+        } catch (Exception e) {
+            model.addAttribute("tag_error", "Error occurred: " + e.getLocalizedMessage());
+        }
+        return showDocument(model, id);
     }
 
 

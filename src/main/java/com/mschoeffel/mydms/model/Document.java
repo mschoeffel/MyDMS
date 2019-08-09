@@ -60,6 +60,13 @@ public class Document {
     public Document() {
     }
 
+
+    public void addTag(Tag tag){
+        if (!tags.contains(tag)){
+            tags.add(tag);
+        }
+    }
+
     public int getId() {
         return id;
     }

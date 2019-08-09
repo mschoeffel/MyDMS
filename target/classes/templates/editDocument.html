@@ -161,16 +161,17 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add Tag</a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Add Tag WEB</a>
-                    <a class="dropdown-item" href="#">Add Tag ADMIN</a>
+                    <th:block th:each="tag : ${tags}">
+                      <a class="dropdown-item" th:href="@{/web/document/addTag/} + ${document.id} + '/'+ ${tag.tag}" th:text="${tag.tag}"></a>
+                    </th:block>
                   </div>
                 </li>
               </ul>
             </div>
             <div class="card-body">
-              <div th:if="${message != null}" th:utext="${message}" class="alert alert-success" role="alert">
+              <div th:if="${tag_message != null}" th:utext="${tag_message}" class="alert alert-success" role="alert">
               </div>
-              <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
+              <div th:if="${tag_error != null}" th:utext="${tag_error}" class="alert alert-danger" role="alert">
               </div>
               <div class="table-responsive-md">
                 <table class="table table-striped">
@@ -191,11 +192,6 @@
                       </a></td>
                     </tr>
                   </th:block>
-                    <tr>
-                      <th scope="row">ADMIN</th>
-                      <td>21.02.2019</td>
-                      <td><a href="#"><button class="btn btn-danger btn-sm">Delete</button></a></td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
