@@ -67,6 +67,10 @@ public class Document {
         }
     }
 
+    public void removeTag(Tag tag){
+        tags.remove(tag);
+    }
+
     public int getId() {
         return id;
     }

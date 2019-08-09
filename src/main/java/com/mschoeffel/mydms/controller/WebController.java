@@ -372,5 +372,19 @@ public class WebController {
         return showDocument(model, id);
     }
 
+    @GetMapping("/document/deleteTag/{id}/{tag}")
+    public String removeTagFromDocument(Model model, @PathVariable Integer id, @PathVariable String tag){
+        Document documentobj = documentService.findById(id);
+        Tag tagobj = tagService.findById(tag);
+        documentobj.removeTag(tagobj);
+        try {
+            documentService.save(documentobj);
+            model.addAttribute("tag_message", "Save Successful");
+        } catch (Exception e) {
+            model.addAttribute("tag_error", "Error occurred: " + e.getLocalizedMessage());
+        }
+        return showDocument(model, id);
+    }
+
 
 }

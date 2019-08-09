@@ -143,7 +143,7 @@
                     <tr>
                       <td th:text="${tag.tag}"></td>
                       <td th:text="${tag.date}"></td>
-                      <td><a th:href="@{/document/removeTag/} + ${tag.tag}">
+                      <td><a th:href="@{/web/document/deleteTag/} + ${document.id} + '/'+ ${tag.tag}">
                         <button class="btn  btn-danger btn-sm">Delete</button>
                       </a></td>
                     </tr>

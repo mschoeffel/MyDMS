@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95789b65-e78b-4b0f-ab52-90f28ae6271d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Document.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editDocument.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editDocument.html" afterDir="false" />
@@ -53,11 +52,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="369" column="36" selection-start-line="369" selection-start-column="36" selection-end-line="369" selection-end-column="36" />
+            <state relative-caret-position="540">
+              <caret line="384" column="9" lean-forward="true" selection-start-line="384" selection-start-column="9" selection-end-line="384" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,8 +67,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Document.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="65" column="26" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
+            <state relative-caret-position="460">
+              <caret line="68" column="4" lean-forward="true" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
+              <folding>
+                <element signature="e#1663#1664#0" expanded="true" />
+                <element signature="e#1695#1696#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,37 +87,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Tag.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editDocument.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-              <folding>
-                <element signature="e#1503#1504#0" expanded="true" />
-                <element signature="e#1535#1536#0" expanded="true" />
-                <element signature="e#1593#1594#0" expanded="true" />
-                <element signature="e#1635#1636#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="368">
+              <caret line="146" column="78" lean-forward="true" selection-start-line="146" selection-start-column="78" selection-end-line="146" selection-end-column="78" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/config/WebConfig.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editSender.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="322">
+              <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editDocument.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="173" column="64" selection-start-line="173" selection-start-column="64" selection-end-line="173" selection-end-column="64" />
+            <state relative-caret-position="391">
+              <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -122,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editTag.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="30" column="26" selection-start-line="27" selection-start-column="20" selection-end-line="30" selection-end-column="26" />
+            <state relative-caret-position="345">
+              <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -201,7 +195,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/editUser.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/editType.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/editTag.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/editSender.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/service/SenderServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/service/TagServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/service/TypeServiceImpl.java" />
@@ -218,9 +211,10 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/editBlank.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Tag.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/list.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/editSender.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/editDocument.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Document.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/editDocument.html" />
       </list>
     </option>
   </component>
@@ -467,12 +461,12 @@
       <workItem from="1565108281485" duration="3910000" />
       <workItem from="1565189698117" duration="3888000" />
       <workItem from="1565280882715" duration="4689000" />
-      <workItem from="1565361741452" duration="1444000" />
+      <workItem from="1565361741452" duration="1712000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40421000" />
+    <option name="totallyTimeSpent" value="40689000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -618,13 +612,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/changePassword.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -847,13 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editSender.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="104" column="28" lean-forward="true" selection-start-line="104" selection-start-column="28" selection-end-line="108" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Tag.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
@@ -874,13 +854,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editTag.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="30" column="26" selection-start-line="27" selection-start-column="20" selection-end-line="30" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -912,27 +885,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Document.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="65" column="26" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
+        <state relative-caret-position="391">
+          <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editTag.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="369" column="36" selection-start-line="369" selection-start-column="36" selection-end-line="369" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="345">
+          <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editSender.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editDocument.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="173" column="64" selection-start-line="173" selection-start-column="64" selection-end-line="173" selection-end-column="64" />
+        <state relative-caret-position="368">
+          <caret line="146" column="78" lean-forward="true" selection-start-line="146" selection-start-column="78" selection-end-line="146" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/model/Document.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="68" column="4" lean-forward="true" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
+          <folding>
+            <element signature="e#1663#1664#0" expanded="true" />
+            <element signature="e#1695#1696#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="384" column="9" lean-forward="true" selection-start-line="384" selection-start-column="9" selection-end-line="384" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
