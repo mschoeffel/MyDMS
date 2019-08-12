@@ -46,7 +46,7 @@
               </div>
               <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
               </div>
-              <form th:action="@{/web/document/update/} + ${document.id}" method="POST">
+              <form th:action="@{/web/document/update/} + ${document.id}" enctype="multipart/form-data" method="POST">
                 <div class="form-row">
                   <div class="col-lg-4 mb-3">
                     <label for="number">Number</label>
@@ -54,11 +54,11 @@
                   </div>
                   <div class="col-lg-4 mb-3">
                     <label for="type">Type</label>
-                    <input type="text" class="form-control" id="type" th:value="${document.type.name}" disabled>
+                    <input type="text" class="form-control" id="type" th:value="${document.type?.name}" disabled>
                   </div>
                   <div class="col-lg-4 mb-3">
                     <label for="sender">Sender</label>
-                    <input type="text" class="form-control" id="sender" th:value="${document.sender.name}" disabled>
+                    <input type="text" class="form-control" id="sender" th:value="${document.sender?.name}" disabled>
                   </div>
                 </div>
                 <div class="form-row">
@@ -80,11 +80,10 @@
                 </div>
                 <div class="form-row">
                   <div class="col-lg-6 mb-3">
-                    <label for="validationServerUsername">File</label>
+                    <label for="uploadfile">File</label>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                      <div class="invalid-feedback">Example invalid custom file feedback</div>
+                      <input type="file" class="custom-file-input" id="uploadfile" name="uploadfile" required>
+                      <label class="custom-file-label" for="uploadfile">Choose file...</label>
                     </div>
                   </div>
                   <div class="col-lg-3 mb-3"></div>

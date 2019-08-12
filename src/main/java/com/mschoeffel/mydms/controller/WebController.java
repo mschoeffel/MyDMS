@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -19,18 +20,20 @@ public class WebController {
     private TagService tagService;
     private SenderService senderService;
     private DocumentService documentService;
+    private StorageService storageService;
 
 
     /*----------------------------------------------------------------------------------------------------------------*/
     /* Home */
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    public WebController(UserService userService, TypeService typeService, TagService tagService, SenderService senderService, DocumentService documentService) {
+    public WebController(UserService userService, TypeService typeService, TagService tagService, SenderService senderService, DocumentService documentService, StorageService storageService) {
         this.userService = userService;
         this.typeService = typeService;
         this.tagService = tagService;
         this.senderService = senderService;
         this.documentService = documentService;
+        this.storageService = storageService;
     }
 
     @GetMapping("/home")
@@ -320,7 +323,7 @@ public class WebController {
     }
 
     @PostMapping("/document/update/{id}")
-    public String updateDocument(Model model, @ModelAttribute("document") Document document, @PathVariable Integer id) {
+    public String updateDocument(Model model, @ModelAttribute("document") Document document, @RequestParam("uploadfile") MultipartFile uploadfile, @PathVariable Integer id) {
         if (documentService.existsId(document.getId())) {
             //Already exists
             Document documentold = documentService.findById(document.getId());
@@ -332,6 +335,7 @@ public class WebController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             document.setUser(userService.findById(authentication.getName()));
             document.setDate(LocalDate.now());
+            storageService.store(uploadfile);
         }
 
         try {
