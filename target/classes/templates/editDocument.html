@@ -53,8 +53,13 @@
                     <input type="text" class="form-control" id="number" th:value="${document.number}" disabled>
                   </div>
                   <div class="col-lg-4 mb-3">
-                    <label for="type">Type</label>
-                    <input type="text" class="form-control" id="type" th:value="${document.type?.name}" disabled>
+                      <label for="type">Type</label>
+                      <select class="custom-select" id="type" name="type">
+                          <option selected>Choose...</option>
+                          <th:block th:each="type : ${types}">
+                          <option th:value="${type.short_name}" th:selected="${document.type?.name} == ${type.name}" th:text="${type.name}"></option>
+                          </th:block>
+                      </select>
                   </div>
                   <div class="col-lg-4 mb-3">
                     <label for="sender">Sender</label>
@@ -83,6 +88,7 @@
                     <label for="uploadfile">File</label>
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="uploadfile" name="uploadfile" required>
+                      <label class="custom-file-label" for="uploadfile">Choose file...</label>
                     </div>
                   </div>
                   <div class="col-lg-3 mb-3"></div>

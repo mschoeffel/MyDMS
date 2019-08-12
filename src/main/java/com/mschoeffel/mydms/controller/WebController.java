@@ -308,6 +308,7 @@ public class WebController {
     public String showDocument(Model model, @PathVariable Integer id) {
         model.addAttribute("document", documentService.findById(id));
         model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("types", typeService.findAll());
         return "editDocument.html";
     }
 
@@ -319,6 +320,7 @@ public class WebController {
         document.setDate(LocalDate.now());
         model.addAttribute("document", document);
         model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("types", typeService.findAll());
         return "editDocument.html";
     }
 
@@ -347,6 +349,7 @@ public class WebController {
 
         model.addAttribute("document", documentService.findById(document.getId()));
         model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("types", typeService.findAll());
         return "editDocument.html";
     }
 
