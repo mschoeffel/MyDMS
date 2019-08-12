@@ -328,17 +328,24 @@ public class WebController {
 
     @PostMapping("/document/update/{id}")
     public String updateDocument(Model model, @ModelAttribute("document") Document document, @RequestParam("uploadfile") MultipartFile uploadfile, @PathVariable Integer id) {
+        boolean newDoc;
         if (documentService.existsId(document.getId())) {
+            newDoc = false;
             //Already exists
             Document documentold = documentService.findById(document.getId());
             document.setUser(documentold.getUser());
             document.setId(documentold.getId());
             document.setDate(documentold.getDate());
         } else {
+            newDoc = true;
             //Need to create new
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             document.setUser(userService.findById(authentication.getName()));
             document.setDate(LocalDate.now());
+            document.setNumber(document.getType().getShort_name() + "-" + document.getId());
+            document.setFile(uploadfile.getName());
+            document.setCtype(uploadfile.getContentType());
+            document.setPath(storageService.getCurrentPath());
             storageService.store(uploadfile);
         }
 

@@ -49,6 +49,9 @@ public class Document {
     @Column(name = "file", updatable = false)
     private String file;
 
+    @Column(name = "ctype", updatable = false)
+    private String ctype;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "documents_tag",
@@ -157,5 +160,13 @@ public class Document {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getCtype() {
+        return ctype;
+    }
+
+    public void setCtype(String ctype) {
+        this.ctype = ctype;
     }
 }

@@ -43,4 +43,8 @@ public class StorageServiceImpl implements StorageService {
             throw new RuntimeException("Failed to store file " + filename, e);
         }
     }
+
+    public String getCurrentPath(){
+        return this.rootLocation.toString();
+    }
 }
