@@ -62,8 +62,13 @@
                       </select>
                   </div>
                   <div class="col-lg-4 mb-3">
-                    <label for="sender">Sender</label>
-                    <input type="text" class="form-control" id="sender" th:value="${document.sender?.name}" disabled>
+                      <label for="sender">Sender</label>
+                      <select class="custom-select" id="sender" name="sender">
+                          <option selected>Choose...</option>
+                          <th:block th:each="sender : ${senders}">
+                              <option th:value="${sender.id}" th:selected="${document.sender?.id} == ${sender.id}" th:text="${sender.name}"></option>
+                          </th:block>
+                      </select>
                   </div>
                 </div>
                 <div class="form-row">

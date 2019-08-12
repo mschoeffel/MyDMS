@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95789b65-e78b-4b0f-ab52-90f28ae6271d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mschoeffel/mydms/controller/WebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editDocument.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editDocument.html" afterDir="false" />
-    </list>
+    <list default="true" id="95789b65-e78b-4b0f-ab52-90f28ae6271d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -353,7 +350,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565628238626" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565629731241" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -413,16 +410,15 @@
       <workItem from="1565189698117" duration="3888000" />
       <workItem from="1565280882715" duration="4689000" />
       <workItem from="1565361741452" duration="1823000" />
-      <workItem from="1565626068349" duration="2165000" />
+      <workItem from="1565626068349" duration="2868000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42965000" />
+    <option name="totallyTimeSpent" value="43668000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18710022" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -434,7 +430,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32944608" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3265306" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3265306" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39941692" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
