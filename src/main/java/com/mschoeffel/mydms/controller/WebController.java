@@ -2,6 +2,9 @@ package com.mschoeffel.mydms.controller;
 
 import com.mschoeffel.mydms.model.*;
 import com.mschoeffel.mydms.service.*;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/web")
@@ -341,9 +345,9 @@ public class WebController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             document.setUser(userService.findById(authentication.getName()));
             document.setDate(LocalDate.now());
-            document.setFile(uploadfile.getName());
-            document.setCtype(uploadfile.getContentType());
-            document.setPath(storageService.getCurrentPath());
+            document.setFile(uploadfile.getOriginalFilename());
+            LocalDate date = LocalDate.now();
+            document.setPath("/" + date.getYear() + "/" + date.getMonth().getValue());
             storageService.store(uploadfile);
         }
 
@@ -400,6 +404,16 @@ public class WebController {
             model.addAttribute("tag_error", "Error occurred: " + e.getLocalizedMessage());
         }
         return showDocument(model, id);
+    }
+
+    @GetMapping("/document/download/{id}")
+    @ResponseBody
+    public ResponseEntity<Resource> downloadDocument(@PathVariable Integer id) {
+
+        Document document = documentService.findById(id);
+        Resource file = storageService.loadAsResource(document);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
 
