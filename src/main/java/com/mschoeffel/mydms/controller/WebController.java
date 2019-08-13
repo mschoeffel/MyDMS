@@ -310,6 +310,7 @@ public class WebController {
         model.addAttribute("tags", tagService.findAll());
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("isNew", false);
         return "editDocument.html";
     }
 
@@ -323,6 +324,7 @@ public class WebController {
         model.addAttribute("tags", tagService.findAll());
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("isNew", true);
         return "editDocument.html";
     }
 
@@ -356,6 +358,7 @@ public class WebController {
         model.addAttribute("tags", tagService.findAll());
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("isNew", false);
         return "editDocument.html";
     }
 

@@ -1,5 +1,4 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html>
   <head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
@@ -54,7 +53,7 @@
                   </div>
                   <div class="col-lg-4 mb-3">
                       <label for="type">Type</label>
-                      <select class="custom-select" id="type" name="type">
+                      <select class="custom-select" id="type" name="type" th:disabled="${isNew} == false">
                           <option selected>Choose...</option>
                           <th:block th:each="type : ${types}">
                           <option th:value="${type.short_name}" th:selected="${document.type?.name} == ${type.name}" th:text="${type.name}"></option>
@@ -63,7 +62,7 @@
                   </div>
                   <div class="col-lg-4 mb-3">
                       <label for="sender">Sender</label>
-                      <select class="custom-select" id="sender" name="sender">
+                      <select class="custom-select" id="sender" name="sender" th:disabled="${isNew} == false">
                           <option selected>Choose...</option>
                           <th:block th:each="sender : ${senders}">
                               <option th:value="${sender.id}" th:selected="${document.sender?.id} == ${sender.id}" th:text="${sender.name}"></option>
@@ -91,10 +90,11 @@
                 <div class="form-row">
                   <div class="col-lg-6 mb-3">
                     <label for="uploadfile">File</label>
-                    <div class="custom-file">
+                    <div class="custom-file" th:if="${isNew} == true">
                       <input type="file" class="custom-file-input" id="uploadfile" name="uploadfile" required>
                       <label class="custom-file-label" for="uploadfile">Choose file...</label>
                     </div>
+                    <input th:if="${isNew} == false" type="text" class="form-control" id="uploadfile" placeholder="File" th:value="${document.path} + ${document.file}" disabled>
                   </div>
                   <div class="col-lg-3 mb-3"></div>
                   <div class="col-lg-3 mb-3">
@@ -104,7 +104,7 @@
                 </div>
                 <br>
                 <button class="btn btn-primary" type="submit">Save</button>
-                <a th:href="@{/web/senders}">
+                <a th:href="@{/web/home}">
                   <button class="btn btn-secondary" type="button">Cancel</button>
                 </a>
                 <div class="float-right">
@@ -193,4 +193,13 @@
   <script src="../../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
   <script src="../../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
   <script src="../../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
+
+  <script>
+      // Add the following code if you want the name of the file appear on select
+      $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+  </script>
+
 </html>
