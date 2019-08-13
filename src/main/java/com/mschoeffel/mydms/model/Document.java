@@ -1,6 +1,7 @@
 package com.mschoeffel.mydms.model;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -44,6 +45,7 @@ public class Document {
     private User user;
 
     @Column(name = "number", updatable = false)
+    @Formula(value = " concat(type, '-', id) ")
     private String number;
 
     @Column(name = "file", updatable = false)
