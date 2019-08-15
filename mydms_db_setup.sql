@@ -1,4 +1,4 @@
-create database if not exists mydms;
+CREATE DATABASE IF NOT EXISTS mydms
 create table authorities
 (
   username  varchar(50) null,
@@ -32,7 +32,6 @@ create table documents
     foreign key (user) references demodb.users (username)
 );
 
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file) VALUES (2, '/test/test/2019/01', 'R', 1, 'Auszug', '2019-08-08', 'BLABLA', 'test', 'R-214739', 'R-1223761.pdf');
 create table documents_tag
 (
   tag      varchar(50) not null,
@@ -43,8 +42,6 @@ create table documents_tag
     foreign key (tag) references tag (tag)
 );
 
-INSERT INTO mydms.documents_tag (tag, document) VALUES ('Finance', 2);
-INSERT INTO mydms.documents_tag (tag, document) VALUES ('OTHER', 2);
 create table sender
 (
   id   int auto_increment
@@ -57,7 +54,6 @@ create table sender
     foreign key (user) references demodb.users (username)
 );
 
-INSERT INTO mydms.sender (id, name, text, date, user) VALUES (1, 'BankXYyy', 'The Bank XY from ZY', '2019-08-07', 'test');
 create table tag
 (
   tag   varchar(64)  not null,
@@ -74,8 +70,6 @@ create table tag
 alter table tag
   add primary key (tag);
 
-INSERT INTO mydms.tag (tag, color, user, text, date) VALUES ('Finance', 'badge-primary', 'test', 'Finance Stuffafasfd', '2019-08-06');
-INSERT INTO mydms.tag (tag, color, user, text, date) VALUES ('OTHER', 'badge-danger', 'test', 'TestText', '2019-08-05');
 create table types
 (
   short_name varchar(3)   not null,
@@ -92,7 +86,6 @@ create table types
 alter table types
   add primary key (short_name);
 
-INSERT INTO mydms.types (short_name, name, text, user, date) VALUES ('R', 'Rechnung', 'asdjfljasofd', 'test', '2019-08-08');
 create table users
 (
   username varchar(50)          not null
@@ -104,8 +97,4 @@ create table users
   email    varchar(255)         null
 );
 
-INSERT INTO mydms.users (username, password, enabled, name, date, email) VALUES ('asdnfadnf', 'aosjdfljf', 1, 'gdfgsdfgdfdfggsdfg', '2222-02-05', 'asdf@nafsd.de');
-INSERT INTO mydms.users (username, password, enabled, name, date, email) VALUES ('baslkdfja', 'sdfasdf', 1, 'asdfasdfa', '1555-12-18', 'sadf@lsdjflk.com');
-INSERT INTO mydms.users (username, password, enabled, name, date, email) VALUES ('bla', 'blapssw', 1, 'bla name', '1110-01-09', 'bla@mail.com');
 INSERT INTO mydms.users (username, password, enabled, name, date, email) VALUES ('test', '{noop}test123', 1, 'asdfsdf', '2019-08-07', 'sfd@dsjh.com');
-INSERT INTO mydms.users (username, password, enabled, name, date, email) VALUES ('testuser', '{bcrypt}$2a$10$EblZqNptyYvcLm/VwDCVAuBjzZOI7khzdyGPBr08PpIi0na624b8.', 1, 'test name', '2018-10-19', 'test@mail.com');

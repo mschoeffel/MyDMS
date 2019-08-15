@@ -127,7 +127,9 @@
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add Tag</a>
                   <div class="dropdown-menu">
                     <th:block th:each="tag : ${tags}">
-                      <a class="dropdown-item" th:href="@{/web/document/addTag/} + ${document.id} + '/'+ ${tag.tag}" th:text="${tag.tag}"></a>
+                      <a class="dropdown-item" th:href="@{/web/document/addTag/} + ${document.id} + '/'+ ${tag.tag}"><span
+                              th:class="'badge badge-pill ' + ${tag.color}"
+                              th:text="${tag.tag}"></span></a>
                     </th:block>
                   </div>
                 </li>
@@ -150,7 +152,8 @@
                   <tbody>
                   <th:block th:each="tag : ${document.tags}">
                     <tr>
-                      <td th:text="${tag.tag}"></td>
+                      <td><span th:class="'badge badge-pill ' + ${tag.color}"
+                              th:text="${tag.tag}"></span></td>
                       <td th:text="${tag.date}"></td>
                       <td><a th:href="@{/web/document/deleteTag/} + ${document.id} + '/'+ ${tag.tag}">
                         <button class="btn  btn-danger btn-sm">Delete</button>

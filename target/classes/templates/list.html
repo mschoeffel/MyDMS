@@ -40,8 +40,9 @@
                                aria-haspopup="true" aria-expanded="false">Tags</a>
                             <div class="dropdown-menu">
                                 <th:block th:each="tag : ${tags}">
-                                    <a class="dropdown-item" th:href="@{/web/search/tag/} + ${tag.tag}"
-                                       th:text="${tag.tag}"></a>
+                                    <a class="dropdown-item" th:href="@{/web/search/tag/} + ${tag.tag}">
+                                        <span th:class="'badge badge-pill ' + ${tag.color}"
+                                              th:text="${tag.tag}"></span></a>
                                 </th:block>
                             </div>
                         </li>
