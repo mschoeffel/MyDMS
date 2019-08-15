@@ -17,19 +17,8 @@
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{/web/home}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    New Document
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Blank</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Invoice</a>
-                    <a class="dropdown-item" href="#">Kontoauszug</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Tankrechnung</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" th:href="@{/web/document}">New Document</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
