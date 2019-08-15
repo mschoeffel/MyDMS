@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/web")
@@ -43,6 +44,7 @@ public class WebController {
     @GetMapping("/home")
     public String showHome(Model model) {
         model.addAttribute("documents", documentService.findAll());
+        model.addAttribute("senders", senderService.findAll());
         return "list.html";
     }
 
@@ -375,6 +377,7 @@ public class WebController {
             model.addAttribute("error", e.getLocalizedMessage());
         }
         model.addAttribute("documents", documentService.findAll());
+        model.addAttribute("senders", senderService.findAll());
         return "list.html";
     }
 
@@ -416,5 +419,17 @@ public class WebController {
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Search */
+    /*----------------------------------------------------------------------------------------------------------------*/
 
+    @GetMapping("/search/sender/{id}")
+    public String searchSenderDocuments(Model model, @PathVariable Integer id){
+        Sender sender = senderService.findById(id);
+        if(sender != null){
+            model.addAttribute("documents", documentService.findBySender(sender));
+        }
+
+        return "list.html";
+    }
 }

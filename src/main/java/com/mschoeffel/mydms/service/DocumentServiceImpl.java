@@ -46,4 +46,9 @@ public class DocumentServiceImpl implements DocumentService {
     public void deleteById(int id) {
         documentRepository.deleteById(id);
     }
+
+    @Override
+    public List<Document> findBySender(Sender sender){
+        return documentRepository.findBySender(sender);
+    }
 }
