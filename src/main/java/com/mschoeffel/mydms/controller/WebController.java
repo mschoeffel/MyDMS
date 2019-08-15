@@ -45,6 +45,8 @@ public class WebController {
     public String showHome(Model model) {
         model.addAttribute("documents", documentService.findAll());
         model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("tags", tagService.findAll());
         return "list.html";
     }
 
@@ -378,6 +380,8 @@ public class WebController {
         }
         model.addAttribute("documents", documentService.findAll());
         model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("tags", tagService.findAll());
         return "list.html";
     }
 
@@ -429,7 +433,33 @@ public class WebController {
         if(sender != null){
             model.addAttribute("documents", documentService.findBySender(sender));
         }
+        model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("tags", tagService.findAll());
+        return "list.html";
+    }
 
+    @GetMapping("/search/type/{short_name}")
+    public String searchTypeDocuments(Model model, @PathVariable String short_name){
+        Type type = typeService.findById(short_name);
+        if(type != null){
+            model.addAttribute("documents", documentService.findByType(type));
+        }
+        model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("tags", tagService.findAll());
+        return "list.html";
+    }
+
+    @GetMapping("/search/tag/{tag}")
+    public String searchTagDocuments(Model model, @PathVariable String tag){
+        Tag tagobj = tagService.findById(tag);
+        if(tagobj != null){
+            model.addAttribute("documents", documentService.findByTag(tagobj));
+        }
+        model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("tags", tagService.findAll());
         return "list.html";
     }
 }

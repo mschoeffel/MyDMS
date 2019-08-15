@@ -2,6 +2,8 @@ package com.mschoeffel.mydms.service;
 
 import com.mschoeffel.mydms.model.Document;
 import com.mschoeffel.mydms.model.Sender;
+import com.mschoeffel.mydms.model.Tag;
+import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.repository.DocumentRepository;
 import com.mschoeffel.mydms.repository.SenderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +52,15 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public List<Document> findBySender(Sender sender){
         return documentRepository.findBySender(sender);
+    }
+
+    @Override
+    public List<Document> findByType(Type type){
+        return documentRepository.findByType(type);
+    }
+
+    @Override
+    public List<Document> findByTag(Tag tag){
+        return documentRepository.findByTags(tag);
     }
 }

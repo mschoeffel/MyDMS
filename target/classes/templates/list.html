@@ -1,100 +1,108 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>MyDMS</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../lib/css/bootstrap.min.css" th:href="@{~/lib/css/bootstrap.min.css}"/>
-  </head>
-  <body>
+</head>
+<body>
 
-  <!--BEGIN NAV-->
-  <div th:replace="fragments/header :: header">&nbsp;</div>
-  <!--END NAV-->
+<!--BEGIN NAV-->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<!--END NAV-->
 
-  <!--BEGIN NAV-->
-  <div th:replace="fragments/search :: search">&nbsp;</div>
-  <!--END NAV-->
+<!--BEGIN NAV-->
+<div th:replace="fragments/search :: search">&nbsp;</div>
+<!--END NAV-->
 
-    <!--BEGIN LIST-->
-    <div class="container" style="padding-top: 2em; max-width: 100%;">
-      <div class="row">
+<!--BEGIN LIST-->
+<div class="container" style="padding-top: 2em; max-width: 100%;">
+    <div class="row">
         <div class="col-sm-12">
-          <div class="card">
-            <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Types</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">Rechnung</a>
-                      <a class="dropdown-item" href="#">Beleg</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Separated link</a>
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/web/home}">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">Types</a>
+                            <div class="dropdown-menu">
+                                <th:block th:each="type : ${types}">
+                                    <a class="dropdown-item" th:href="@{/web/search/type/} + ${type.short_name}"
+                                       th:text="${type.name}"></a>
+                                </th:block>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">Tags</a>
+                            <div class="dropdown-menu">
+                                <th:block th:each="tag : ${tags}">
+                                    <a class="dropdown-item" th:href="@{/web/search/tag/} + ${tag.tag}"
+                                       th:text="${tag.tag}"></a>
+                                </th:block>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">Sender</a>
+                            <div class="dropdown-menu">
+                                <th:block th:each="sender : ${senders}">
+                                    <a class="dropdown-item" th:href="@{/web/search/sender/} + ${sender.id}"
+                                       th:text="${sender.name}"></a>
+                                </th:block>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive-md">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Text</th>
+                                <th scope="col">Sender</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Tag</th>
+                                <th scope="col">Open</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="document : ${documents}">
+                                <tr>
+                                    <td th:text="${document.number}"></td>
+                                    <td th:text="${document.type?.name}"></td>
+                                    <td th:text="${document.title}"></td>
+                                    <td th:text="${document.text}"></td>
+                                    <td th:text="${document.sender?.name}"></td>
+                                    <td th:text="${document.date}"></td>
+                                    <td>
+                                        <th:block th:each="tag : ${document.tags}"><span
+                                                th:class="'badge badge-pill ' + ${tag.color}"
+                                                th:text="${tag.tag}"></span> </th:block>
+                                    </td>
+                                    <td><a th:href="@{/web/document/} + ${document.id}">
+                                        <button class="btn btn-primary btn-sm">Open</button>
+                                    </a></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
                     </div>
-                  </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tags</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Finanzamt</a>
-                    <a class="dropdown-item" href="#">Bank</a>
-                    <a class="dropdown-item" href="#">???</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">???</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sender</a>
-                  <div class="dropdown-menu">
-                    <th:block th:each="sender : ${senders}">
-                      <a class="dropdown-item" th:href="@{/web/search/sender/} + ${sender.id}" th:text="${sender.name}"></a>
-                    </th:block>
-                  </div>
-                </li>
-              </ul>
+                </div>
             </div>
-            <div class="card-body">
-              <div class="table-responsive-md">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Text</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Tag</th>
-                      <th scope="col">Open</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <th:block th:each="document : ${documents}">
-                    <tr>
-                      <td th:text="${document.number}"></td>
-                      <td th:text="${document.title}"></td>
-                      <td th:text="${document.text}"></td>
-                      <td th:text="${document.user.username}"></td>
-                      <td th:text="${document.date}"></td>
-                      <td><th:block th:each="tag : ${document.tags}"><span th:class="'badge badge-pill ' + ${tag.color}" th:text="${tag.tag}"></span></th:block></td>
-                      <td><a th:href="@{/web/document/} + ${document.id}">
-                        <button class="btn btn-primary btn-sm">Open</button>
-                      </a></td>
-                    </tr>
-                  </th:block>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!--END LIST-->
-  
-  </body>
-  <script src="../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
-  <script src="../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
-  <script src="../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
+</div>
+<!--END LIST-->
+
+</body>
+<script src="../lib/js/jquery.js" th:src="@{~/lib/js/jquery.js}"></script>
+<script src="../lib/js/popper.js" th:src="@{~/lib/js/popper.js}"></script>
+<script src="../lib/js/bootstrap.min.js" th:src="@{~/lib/js/bootstrap.min.js}"></script>
 </html>

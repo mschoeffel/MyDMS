@@ -2,6 +2,8 @@ package com.mschoeffel.mydms.service;
 
 import com.mschoeffel.mydms.model.Document;
 import com.mschoeffel.mydms.model.Sender;
+import com.mschoeffel.mydms.model.Tag;
+import com.mschoeffel.mydms.model.Type;
 
 import java.util.List;
 
@@ -18,5 +20,7 @@ public interface DocumentService {
     public void deleteById(int id);
 
     public List<Document> findBySender(Sender sender);
+    public List<Document> findByType(Type type);
+    public List<Document> findByTag(Tag tag);
 
 }
