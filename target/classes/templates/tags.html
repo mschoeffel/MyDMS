@@ -44,7 +44,8 @@
                             <th:block th:each="tag : ${tags}">
                                 <tr>
                                     <td th:text="${tag.tag}"></td>
-                                    <td th:text="${tag.color}"></td>
+                                    <td><span th:class="'badge badge-pill ' + ${tag.color}"
+                                            th:text="${tag.tag}"></span></td>
                                     <td th:text="${tag.text}"></td>
                                     <td th:text="${tag.user.username}"></td>
                                     <td th:text="${tag.date}"></td>
