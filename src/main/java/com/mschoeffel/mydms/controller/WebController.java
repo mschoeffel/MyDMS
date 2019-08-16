@@ -337,21 +337,29 @@ public class WebController {
     }
 
     @PostMapping("/document/update/{id}")
-    public String updateDocument(Model model, @ModelAttribute("document") Document document, @RequestParam("uploadfile") MultipartFile uploadfile, @PathVariable Integer id) {
+    public String updateDocument(Model model, @ModelAttribute("document") Document document, @RequestParam(value = "uploadfile", required=false) MultipartFile uploadfile, @PathVariable Integer id) {
         if (documentService.existsId(document.getId())) {
             //Already exists
             Document documentold = documentService.findById(document.getId());
             document.setUser(documentold.getUser());
             document.setId(documentold.getId());
             document.setDate(documentold.getDate());
+            document.setSender(documentold.getSender());
+            document.setType(documentold.getType());
+            document.setNumber(documentold.getNumber());
+            document.setPath(documentold.getPath());
+            document.setFile(documentold.getFile());
+            document.setTags(documentold.getTags());
         } else {
             //Need to create new
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             document.setUser(userService.findById(authentication.getName()));
             document.setDate(LocalDate.now());
-            document.setFile(uploadfile.getOriginalFilename());
-            LocalDate date = LocalDate.now();
-            document.setPath("/" + date.getYear() + "/" + date.getMonth().getValue());
+            if(uploadfile != null) {
+                document.setFile(uploadfile.getOriginalFilename());
+                LocalDate date = LocalDate.now();
+                document.setPath("/" + date.getYear() + "/" + date.getMonth().getValue());
+            }
             storageService.store(uploadfile);
         }
 

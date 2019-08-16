@@ -7,8 +7,6 @@ Future TODO:
 * Change Websevices to REST Services.
 * Use Swagger to document the REST Services.
 * Update the Thymeleaf forms to use objects.
-* Add more colors for tags.
-* Update the Navbar.
 * Implement search allgorithm.
 * Add more Document Types.
 

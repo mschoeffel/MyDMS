@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "documents")
-@DynamicUpdate
+@DynamicUpdate()
 public class Document {
 
     @Id
@@ -19,7 +19,7 @@ public class Document {
     @Column(name = "id", updatable = false)
     private int id;
 
-    @Column(name = "path")
+    @Column(name = "path", updatable = false)
     private String path;
 
     @ManyToOne(fetch = FetchType.EAGER)
