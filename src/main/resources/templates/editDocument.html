@@ -167,6 +167,88 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xl-12 d-flex align-items-stretch" style="padding-top: 2em">
+          <div class="card" style="width: 100%">
+            <div class="card-header">
+              Invoice
+            </div>
+            <div class="card-body">
+              <div class="alert alert-success" role="alert">
+                Erfolgeich abgemeldet
+              </div>
+              <div class="alert alert-danger" role="alert">
+                Fehler
+              </div>
+              <form>
+                <div class="form-row">
+                  <div class="col-lg-4 mb-3">
+                    <label for="invoiceNr">Invoicenr</label>
+                    <input type="text" class="form-control is-valid" id="invoiceNr" th:value="${document.invoiceNr}">
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <label for="invoiceDate">InvoiceDate</label>
+                    <input type="date" class="form-control is-valid" id="invoiceDate" placeholder="2000-01-01" th:value="${document.invoiceDate}">
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <label for="invoicePrice">Price</label>
+                    <input type="number" class="form-control is-valid" id="invoicePrice" placeholder="000.00" step="0.01" th:value="${document.invoicePrice}">
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-lg-12 mb-3">
+                    <label for="invoiceDetail">Item detail</label>
+                    <textarea class="form-control" id="invoiceDetail" rows="5" th:text="${document.invoiceDetail}"></textarea>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-lg-4 mb-3">
+                    <label for="invoicePayment">Payment method</label>
+                    <select class="custom-select is-valid" id="invoicePayment">
+                      <option selected>Choose...</option>
+                      <option value="paypal" th:selected="${document.invoicePayment} == 'paypal'">Paypal</option>
+                      <option value="bank" th:selected="${document.invoicePayment} == 'bank'">Bank</option>
+                      <option value="other" th:selected="${document.invoicePayment} == 'other'">Other</option>
+                    </select>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-lg-2 mb-3">
+                    <label for="inlineFormCustomSelect">Already payed</label>
+                    <select class="custom-select is-valid" id="inlineFormCustomSelect">
+                      <option selected>Choose...</option>
+                      <option value="true" th:selected="${document.invoiceBalanced}">Yes</option>
+                      <option value="false" th:selected="${document.invoiceBalanced}">No</option>
+                    </select>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-lg-4 mb-3"></div>
+                </div>
+                <br>
+                <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-secondary" type="submit">Cancel</button>
+                <div class="float-right">
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Delete
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Modal -->

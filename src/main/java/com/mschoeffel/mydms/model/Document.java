@@ -59,6 +59,29 @@ public class Document {
     )
     private List<Tag> tags;
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Invoice                                                                                                        */
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @Column(name = "invoice_nr")
+    private String invoiceNr;
+
+    @Column(name = "invoice_price")
+    private Double invoicePrice;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "invoice_date")
+    private LocalDate invoiceDate;
+
+    @Column(name = "invoice_detail")
+    private String invoiceDetail;
+
+    @Column(name = "invoice_payment")
+    private String invoicePayment;
+
+    @Column(name = "invoice_balanced")
+    private Boolean invoiceBalanced;
+
     public Document() {
     }
 
@@ -159,5 +182,53 @@ public class Document {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getInvoiceNr() {
+        return invoiceNr;
+    }
+
+    public void setInvoiceNr(String invoiceNr) {
+        this.invoiceNr = invoiceNr;
+    }
+
+    public Double getInvoicePrice() {
+        return invoicePrice;
+    }
+
+    public void setInvoicePrice(Double invoicePrice) {
+        this.invoicePrice = invoicePrice;
+    }
+
+    public LocalDate getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public String getInvoiceDetail() {
+        return invoiceDetail;
+    }
+
+    public void setInvoiceDetail(String invoiceDetail) {
+        this.invoiceDetail = invoiceDetail;
+    }
+
+    public String getInvoicePayment() {
+        return invoicePayment;
+    }
+
+    public void setInvoicePayment(String invoicePayment) {
+        this.invoicePayment = invoicePayment;
+    }
+
+    public Boolean getInvoiceBalanced() {
+        return invoiceBalanced;
+    }
+
+    public void setInvoiceBalanced(Boolean invoiceBalanced) {
+        this.invoiceBalanced = invoiceBalanced;
     }
 }
