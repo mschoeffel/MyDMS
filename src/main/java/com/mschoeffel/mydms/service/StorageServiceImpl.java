@@ -26,7 +26,7 @@ public class StorageServiceImpl implements StorageService {
         this.rootLocation = Paths.get("src/main/resources/storage");
     }
 
-    public void store(MultipartFile file){
+    public void store(MultipartFile file, Document document){
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -59,7 +59,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public String buildStorageFilePath(Document document){
-        return document.getPath() + "\\" + document.getFile();
+        return "\\" + document.getFile();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class StorageServiceImpl implements StorageService {
         try {
             Path file = Paths.get(rootLocation.toString() + buildStorageFilePath(document));
             Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
+            if (resource.exists()) {
                 return resource;
             }
             else {

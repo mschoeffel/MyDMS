@@ -360,7 +360,7 @@ public class WebController {
                 LocalDate date = LocalDate.now();
                 document.setPath("/" + date.getYear() + "/" + date.getMonth().getValue());
             }
-            storageService.store(uploadfile);
+            storageService.store(uploadfile, document);
         }
 
         try {
@@ -476,7 +476,7 @@ public class WebController {
         List<Document> documents = new ArrayList<>();
 
         documents.addAll(documentService.findAllByTitleContaining(text));
-        
+
         documentService.findAllByTextContaining(text).forEach(item ->{
             if(!documents.contains(item)){
                 documents.add(item);

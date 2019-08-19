@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 public interface StorageService {
 
-    public void store(MultipartFile file);
+    public void store(MultipartFile file, Document document);
     public String getCurrentPath();
     public Path load(String filename);
     public Resource loadAsResource(Document document);

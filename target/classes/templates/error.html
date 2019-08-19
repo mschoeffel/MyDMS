@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{~/lib/css/bootstrap.min.css}"/>
+    <title>MyDMS</title>
+</head>
+<body>
+
+<div class="container" style="padding-top: 2em">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    ERROR
+                </div>
+                <div class="card-body">
+                    <p>Ups something went wrong.</p>
+                    <br>
+                    <p>Please go back to the mainpage.</p>
+                    <a th:href="@{/web/home}"><button class="btn btn-primary" type="button">Home</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script th:src="@{~/lib/js/jquery.js}"></script>
+<script th:src="@{~/lib/js/popper.js}"></script>
+<script th:src="@{~/lib/js/bootstrap.min.js}"></script>
+</html>
