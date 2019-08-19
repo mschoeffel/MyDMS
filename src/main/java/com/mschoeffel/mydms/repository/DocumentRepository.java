@@ -13,4 +13,6 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
     public List<Document> findBySender(Sender sender);
     public List<Document> findByType(Type type);
     public List<Document> findByTags(Tag tag);
+    public List<Document> findAllByTitleContaining(String title);
+    public List<Document> findAllByTextContaining(String text);
 }

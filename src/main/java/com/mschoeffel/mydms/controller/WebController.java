@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/web")
@@ -466,6 +468,26 @@ public class WebController {
         model.addAttribute("senders", senderService.findAll());
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("tags", tagService.findAll());
+        return "list.html";
+    }
+
+    @PostMapping("/search/form")
+    public String searchIdDocument(Model model, @RequestParam String text){
+        List<Document> documents = new ArrayList<>();
+
+        documents.addAll(documentService.findAllByTitleContaining(text));
+        
+        documentService.findAllByTextContaining(text).forEach(item ->{
+            if(!documents.contains(item)){
+                documents.add(item);
+            }
+        });
+
+        model.addAttribute("documents", documents);
+        model.addAttribute("senders", senderService.findAll());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("search", text);
         return "list.html";
     }
 }

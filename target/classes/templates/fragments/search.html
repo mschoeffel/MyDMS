@@ -19,23 +19,14 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">Search
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">ID</a>
-                                <a class="dropdown-item" href="#">Titel</a>
-                                <a class="dropdown-item" href="#">Beschreibung</a>
-                                <a class="dropdown-item" href="#">Absender</a>
-                                <div role="separator" class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Tags</a>
-                                <a class="dropdown-item" href="#">Datum</a>
+                        <form th:method="POST" th:action="@{/web/search/form}">
+                            <div class="input-group mb-3 w-100">
+                                <input type="text" id="text" name="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" th:value="${search} != null ? ${search} : ''">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </form>
                 </div>
             </div>
         </div>

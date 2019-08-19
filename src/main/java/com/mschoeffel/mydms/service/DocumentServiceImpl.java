@@ -63,4 +63,14 @@ public class DocumentServiceImpl implements DocumentService {
     public List<Document> findByTag(Tag tag){
         return documentRepository.findByTags(tag);
     }
+
+    @Override
+    public List<Document> findAllByTitleContaining(String title){
+        return documentRepository.findAllByTitleContaining(title);
+    }
+
+    @Override
+    public List<Document> findAllByTextContaining(String text){
+        return documentRepository.findAllByTextContaining(text);
+    }
 }
