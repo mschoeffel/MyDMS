@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class AppConfig {
 
     @Autowired
