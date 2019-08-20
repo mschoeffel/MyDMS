@@ -40,7 +40,7 @@ public class Document {
     @Column(name = "text")
     private String text;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user", updatable = false)
     private User user;
 
