@@ -79,4 +79,12 @@ public class Type {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
 }

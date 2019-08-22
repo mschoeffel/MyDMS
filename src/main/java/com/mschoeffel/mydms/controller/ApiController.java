@@ -1,6 +1,7 @@
 package com.mschoeffel.mydms.controller;
 
 import com.mschoeffel.mydms.model.Document;
+import com.mschoeffel.mydms.model.Sender;
 import com.mschoeffel.mydms.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,10 @@ public class ApiController {
         this.storageService = storageService;
     }
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Documents */
+    /*----------------------------------------------------------------------------------------------------------------*/
+
     @GetMapping("/documents")
     public List<Document> getAllDocuments(){
         return documentService.findAll();
@@ -58,10 +63,42 @@ public class ApiController {
 
     @RequestMapping(value = "/documents", method = RequestMethod.PUT, params = {"id"})
     public ResponseEntity<Object> updateDocument(@RequestBody Document document, @RequestParam int id){
-        Document getDocument = documentService.findById(id);
-
         document.setId(id);
         documentService.save(document);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Sender */
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @GetMapping("/sender")
+    public List<Sender> getAllSender(){
+        return senderService.findAll();
+    }
+
+    @RequestMapping(value = "/sender", method = RequestMethod.GET, params = {"id"})
+    public Sender getSender(@RequestParam int id){
+        return senderService.findById(id);
+    }
+
+    @RequestMapping(value = "/sender", method = RequestMethod.DELETE, params = {"id"})
+    public void deleteSender(@RequestParam int id){
+        senderService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/sender", method = RequestMethod.POST)
+    public ResponseEntity<Object> createSender(@RequestBody Sender sender){
+        Sender savedSender = senderService.save(sender);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(savedSender.getId()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @RequestMapping(value = "/sender", method = RequestMethod.PUT, params = {"id"})
+    public ResponseEntity<Object> updateSender(@RequestBody Sender sender, @RequestParam int id){
+        sender.setId(id);
+        senderService.save(sender);
 
         return ResponseEntity.noContent().build();
     }
