@@ -1,5 +1,6 @@
 package com.mschoeffel.mydms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,6 +31,7 @@ public class Tag {
     @Column(name = "date", updatable = false)
     private LocalDate date;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "tags")
     private List<Document> documents;
 

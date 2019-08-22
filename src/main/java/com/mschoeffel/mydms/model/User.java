@@ -1,5 +1,6 @@
 package com.mschoeffel.mydms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,15 +33,19 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Type> types;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Document> documents;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Sender> senders;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Tag> tags;
 
