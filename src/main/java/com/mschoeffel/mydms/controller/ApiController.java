@@ -1,9 +1,6 @@
 package com.mschoeffel.mydms.controller;
 
-import com.mschoeffel.mydms.model.Document;
-import com.mschoeffel.mydms.model.Sender;
-import com.mschoeffel.mydms.model.Tag;
-import com.mschoeffel.mydms.model.Type;
+import com.mschoeffel.mydms.model.*;
 import com.mschoeffel.mydms.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -169,6 +166,40 @@ public class ApiController {
     public ResponseEntity<Object> updateType(@RequestBody Type type, @RequestParam String id){
         type.setShort_name(id);
         typeService.save(type);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* User */
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userService.findAll();
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET, params = {"id"})
+    public User getUser(@RequestParam String id){
+        return userService.findById(id);
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.DELETE, params = {"id"})
+    public void deleteUser(@RequestParam String id){
+        userService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public ResponseEntity<Object> createUser(@RequestBody User user){
+        User savedUser = userService.save(user);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(savedUser.getUsername()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.PUT, params = {"id"})
+    public ResponseEntity<Object> updateUser(@RequestBody User user, @RequestParam String id){
+        user.setUsername(id);
+        userService.save(user);
 
         return ResponseEntity.noContent().build();
     }
