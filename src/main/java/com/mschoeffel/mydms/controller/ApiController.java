@@ -3,6 +3,7 @@ package com.mschoeffel.mydms.controller;
 import com.mschoeffel.mydms.model.Document;
 import com.mschoeffel.mydms.model.Sender;
 import com.mschoeffel.mydms.model.Tag;
+import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -134,6 +135,40 @@ public class ApiController {
     public ResponseEntity<Object> updateTag(@RequestBody Tag tag, @RequestParam String id){
         tag.setTag(id);
         tagService.save(tag);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Type */
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @GetMapping("/types")
+    public List<Type> getAllTypes(){
+        return typeService.findAll();
+    }
+
+    @RequestMapping(value = "/type", method = RequestMethod.GET, params = {"id"})
+    public Type getType(@RequestParam String id){
+        return typeService.findById(id);
+    }
+
+    @RequestMapping(value = "/type", method = RequestMethod.DELETE, params = {"id"})
+    public void deleteType(@RequestParam String id){
+        typeService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/type", method = RequestMethod.POST)
+    public ResponseEntity<Object> createType(@RequestBody Type type){
+        Type savedType = typeService.save(type);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(savedType.getShort_name()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @RequestMapping(value = "/type", method = RequestMethod.PUT, params = {"id"})
+    public ResponseEntity<Object> updateType(@RequestBody Type type, @RequestParam String id){
+        type.setShort_name(id);
+        typeService.save(type);
 
         return ResponseEntity.noContent().build();
     }
