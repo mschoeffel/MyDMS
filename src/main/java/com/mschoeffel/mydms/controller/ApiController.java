@@ -2,6 +2,7 @@ package com.mschoeffel.mydms.controller;
 
 import com.mschoeffel.mydms.model.Document;
 import com.mschoeffel.mydms.model.Sender;
+import com.mschoeffel.mydms.model.Tag;
 import com.mschoeffel.mydms.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -73,7 +74,7 @@ public class ApiController {
     /* Sender */
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    @GetMapping("/sender")
+    @GetMapping("/senders")
     public List<Sender> getAllSender(){
         return senderService.findAll();
     }
@@ -99,6 +100,40 @@ public class ApiController {
     public ResponseEntity<Object> updateSender(@RequestBody Sender sender, @RequestParam int id){
         sender.setId(id);
         senderService.save(sender);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    /* Tag */
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @GetMapping("/tags")
+    public List<Tag> getAllTags(){
+        return tagService.findAll();
+    }
+
+    @RequestMapping(value = "/tag", method = RequestMethod.GET, params = {"id"})
+    public Tag getTag(@RequestParam String id){
+        return tagService.findById(id);
+    }
+
+    @RequestMapping(value = "/tag", method = RequestMethod.DELETE, params = {"id"})
+    public void deleteTag(@RequestParam String id){
+        tagService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/tag", method = RequestMethod.POST)
+    public ResponseEntity<Object> createTag(@RequestBody Tag tag){
+        Tag savedTag = tagService.save(tag);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(savedTag.getTag()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @RequestMapping(value = "/tag", method = RequestMethod.PUT, params = {"id"})
+    public ResponseEntity<Object> updateTag(@RequestBody Tag tag, @RequestParam String id){
+        tag.setTag(id);
+        tagService.save(tag);
 
         return ResponseEntity.noContent().build();
     }
