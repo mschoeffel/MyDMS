@@ -115,9 +115,9 @@
                   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Tags</a>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add Tag</a>
+                  <a th:class="'nav-link dropdown-toggle' + (${isNew} == true ? ' disabled' : '')" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add Tag</a>
                   <div class="dropdown-menu">
-                    <th:block th:each="tag : ${tags}">
+                    <th:block th:each="tag : ${tags}" th:if="${isNew} != true">
                       <a class="dropdown-item" th:href="@{/web/document/addTag/} + ${document.id} + '/'+ ${tag.tag}"><span
                               th:class="'badge badge-pill ' + ${tag.color}"
                               th:text="${tag.tag}"></span></a>
