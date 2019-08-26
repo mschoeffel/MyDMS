@@ -1,9 +1,4 @@
-CREATE
-DATABASE
-IF
-NOT
-EXISTS
-mydms
+CREATE DATABASE IF NOT EXISTS mydms
 create table authorities
 (
   username  varchar(50) null,
