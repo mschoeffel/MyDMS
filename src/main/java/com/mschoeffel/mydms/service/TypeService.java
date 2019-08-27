@@ -17,4 +17,6 @@ public interface TypeService {
 
     public void deleteById(String short_name);
 
+    public List<Type> findAllOrderByName();
+
 }

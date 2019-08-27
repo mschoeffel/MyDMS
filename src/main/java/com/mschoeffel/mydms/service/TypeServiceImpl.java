@@ -5,6 +5,7 @@ import com.mschoeffel.mydms.model.User;
 import com.mschoeffel.mydms.repository.TypeRepository;
 import com.mschoeffel.mydms.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +46,10 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public void deleteById(String short_name) {
         typeRepository.deleteById(short_name);
+    }
+
+    @Override
+    public List<Type> findAllOrderByName() {
+        return typeRepository.findAll(Sort.by(Sort.Order.asc("name")));
     }
 }
