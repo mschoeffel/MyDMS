@@ -17,4 +17,6 @@ public interface SenderService {
 
     public void deleteById(int id);
 
+    public List<Sender> findAllOrderByName();
+
 }

@@ -5,6 +5,7 @@ import com.mschoeffel.mydms.model.Tag;
 import com.mschoeffel.mydms.repository.SenderRepository;
 import com.mschoeffel.mydms.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +46,10 @@ public class SenderServiceImpl implements SenderService {
     @Override
     public void deleteById(int id) {
         senderRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Sender> findAllOrderByName(){
+        return senderRepository.findAll(Sort.by(Sort.Order.asc("name")));
     }
 }
