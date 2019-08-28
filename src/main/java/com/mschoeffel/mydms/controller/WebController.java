@@ -46,7 +46,7 @@ public class WebController {
         model.addAttribute("documents", documentService.findAll());
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("types", typeService.findAllOrderByName());
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         return "list.html";
     }
 
@@ -315,7 +315,7 @@ public class WebController {
     @GetMapping("/document/{id}")
     public String showDocument(Model model, @PathVariable Integer id) {
         model.addAttribute("document", documentService.findById(id));
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         model.addAttribute("types", typeService.findAllOrderByName());
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("isNew", false);
@@ -329,7 +329,7 @@ public class WebController {
         document.setUser(userService.findById(authentication.getName()));
         document.setDate(LocalDate.now());
         model.addAttribute("document", document);
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         model.addAttribute("types", typeService.findAllOrderByName());
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("isNew", true);
@@ -371,7 +371,7 @@ public class WebController {
         }
 
         model.addAttribute("document", documentService.findById(document.getId()));
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         model.addAttribute("types", typeService.findAllOrderByName());
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("isNew", false);
@@ -389,7 +389,7 @@ public class WebController {
         model.addAttribute("documents", documentService.findAll());
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("types", typeService.findAllOrderByName());
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         return "list.html";
     }
 
@@ -443,7 +443,7 @@ public class WebController {
         }
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("types", typeService.findAllOrderByName());
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         return "list.html";
     }
 
@@ -455,7 +455,7 @@ public class WebController {
         }
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("types", typeService.findAllOrderByName());
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         return "list.html";
     }
 
@@ -467,7 +467,7 @@ public class WebController {
         }
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("types", typeService.findAllOrderByName());
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         return "list.html";
     }
 
@@ -486,7 +486,7 @@ public class WebController {
         model.addAttribute("documents", documents);
         model.addAttribute("senders", senderService.findAllOrderByName());
         model.addAttribute("types", typeService.findAllOrderByName());
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findAllOrderByTag());
         model.addAttribute("search", text);
         return "list.html";
     }

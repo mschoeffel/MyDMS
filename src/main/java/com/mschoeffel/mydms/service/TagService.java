@@ -17,4 +17,6 @@ public interface TagService {
 
     public void deleteById(String tag);
 
+    public List<Tag> findAllOrderByTag();
+
 }

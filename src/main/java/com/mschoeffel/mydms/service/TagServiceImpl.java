@@ -5,6 +5,7 @@ import com.mschoeffel.mydms.model.Type;
 import com.mschoeffel.mydms.repository.TagRepository;
 import com.mschoeffel.mydms.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +46,10 @@ public class TagServiceImpl implements TagService {
     @Override
     public void deleteById(String tag) {
         tagRepository.deleteById(tag);
+    }
+
+    @Override
+    public List<Tag> findAllOrderByTag() {
+        return tagRepository.findAll(Sort.by(Sort.Order.asc("tag")));
     }
 }
