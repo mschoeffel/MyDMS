@@ -85,7 +85,7 @@
                       <input type="file" class="custom-file-input" id="uploadfile" name="uploadfile" required>
                       <label class="custom-file-label" for="uploadfile">Choose file...</label>
                     </div>
-                    <input th:if="${isNew} == false" type="text" class="form-control" id="uploadfile" placeholder="File" th:value="*{path} + *{file}" disabled>
+                    <input th:if="${isNew} == false" type="text" class="form-control" id="uploadfile" placeholder="File" th:value="*{path} +'/'+ *{type?.short_name} + '-' + *{fileRand} + '-' + *{file}" disabled>
                   </div>
                   <div class="col-lg-3 mb-3"></div>
                   <div class="col-lg-3 mb-3">

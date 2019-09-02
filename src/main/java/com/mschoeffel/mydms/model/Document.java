@@ -51,6 +51,9 @@ public class Document {
     @Column(name = "file", updatable = false)
     private String file;
 
+    @Column(name = "file_rand", updatable = false)
+    private String fileRand;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "documents_tag",
@@ -159,5 +162,13 @@ public class Document {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getFileRand() {
+        return fileRand;
+    }
+
+    public void setFileRand(String fileRand) {
+        this.fileRand = fileRand;
     }
 }

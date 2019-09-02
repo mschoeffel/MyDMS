@@ -13,5 +13,6 @@ public interface StorageService {
     public Path load(String filename);
     public Resource loadAsResource(Document document);
 
-    public String buildStorageFilePath(Document document);
+    public String buildStoragePath(Document document);
+    public String buildFileName(Document document);
 }

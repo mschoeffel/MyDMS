@@ -1,6 +1,7 @@
 package com.mschoeffel.mydms.service;
 
 import com.mschoeffel.mydms.model.Document;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -15,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.SecureRandom;
 
 @Service
 public class StorageServiceImpl implements StorageService {
@@ -39,7 +42,12 @@ public class StorageServiceImpl implements StorageService {
                                 + filename);
             }
             try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, this.rootLocation.resolve(filename),
+                File fileDir = new File(buildStoragePath(document));
+                if (! fileDir.exists()){
+                    fileDir.mkdirs();
+                }
+
+                Files.copy(inputStream, Paths.get(buildStoragePath(document) + buildFileName(document)),
                         StandardCopyOption.REPLACE_EXISTING);
             }
         }
@@ -58,14 +66,23 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public String buildStorageFilePath(Document document){
-        return "\\" + document.getFile();
+    public String buildStoragePath(Document document){
+        return "src/main/resources/storage/" + document.getDate().getYear() + "/" + document.getDate().getMonth().getValue() + "/";
+    }
+
+    @Override
+    public String buildFileName(Document document){
+        if(document.getFileRand() == null || document.getFileRand().isEmpty()){
+            RandomString randomString = new RandomString(10);
+            document.setFileRand(randomString.nextString());
+        }
+        return document.getType().getShort_name() + "-" + document.getFileRand() + "-" + document.getFile();
     }
 
     @Override
     public Resource loadAsResource(Document document) {
         try {
-            Path file = Paths.get(rootLocation.toString() + buildStorageFilePath(document));
+            Path file = Paths.get(buildStoragePath(document) + buildFileName(document));
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists()) {
                 return resource;
