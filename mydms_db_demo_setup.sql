@@ -10,23 +10,18 @@ create table authorities
 INSERT INTO mydms.authorities (username, authority) VALUES ('test', 'ROLE_WEB');
 create table documents
 (
-  id               int auto_increment
+  id        int auto_increment
     primary key,
-  path             varchar(128) null,
-  type             varchar(3)   null,
-  sender           int          null,
-  title            varchar(64)  null,
-  date             date         null,
-  text             varchar(255) null,
-  user             varchar(50)  null,
-  number           varchar(64)  null,
-  file             varchar(64)  null,
-  invoice_nr       varchar(64)  null,
-  invoice_price    double       null,
-  invoice_date     date         null,
-  invoice_detail   varchar(255) null,
-  invoice_payment  varchar(32)  null,
-  invoice_balanced tinyint(1)   null,
+  path      varchar(128) null,
+  type      varchar(3)   null,
+  sender    int          null,
+  title     varchar(64)  null,
+  date      date         null,
+  text      varchar(255) null,
+  user      varchar(50)  null,
+  number    varchar(64)  null,
+  file      varchar(64)  null,
+  file_rand varchar(10)  null,
   constraint documents_number_uindex
     unique (number),
   constraint documents_sender_id_fk
@@ -38,21 +33,21 @@ create table documents
     foreign key (user) references demodb.users (username)
 );
 
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (12, '/2019/8', 'FB', 6, 'Fuel for car from wednesday', '2019-08-25', '50 Liter fuel
-Price: XY €', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (13, '/2019/8', 'L', 5, 'Adobe Licence', '2019-08-25', 'Adobe CC Licence till 2020
-Price: XY €', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (14, '/2019/8', 'L', 9, 'Programm licence College', '2019-08-25', 'Free Licence from college
-Expiration: 2020', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (15, '/2019/8', 'I', 10, 'Rend Bill', '2019-08-25', 'Bill for August 2019
-Need to pay', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (16, '/2019/8', 'M', 8, 'Salary August 2019', '2019-08-25', 'Salarycheck', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (17, '/2019/8', 'I', 3, 'Wheel change', '2019-08-25', 'Invoice for wheel change in March 2019
-Price: XY€', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (18, '/2019/8', 'B', 4, 'Abo check', '2019-08-25', 'Need to check my local supermarket abo', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (19, '/2019/8', 'M', 7, 'Money back form event', '2019-08-25', 'Got some money back from the recent event in July 2019
-Amount: XY €', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
-INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, invoice_nr, invoice_price, invoice_date, invoice_detail, invoice_payment, invoice_balanced) VALUES (20, '/2019/8', 'B', 3, 'New Car licence', '2019-08-25', 'Licence to the new car', 'test', null, '01DemoFile.txt', null, null, null, null, null, null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (12, '/2019/8', 'FB', 6, 'Fuel for car from wednesday', '2019-08-25', '50 Liter fuel
+Price: XY €', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (13, '/2019/8', 'L', 5, 'Adobe Licence', '2019-08-25', 'Adobe CC Licence till 2020
+Price: XY €', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (14, '/2019/8', 'L', 9, 'Programm licence College', '2019-08-25', 'Free Licence from college
+Expiration: 2020', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (15, '/2019/8', 'I', 10, 'Rend Bill', '2019-08-25', 'Bill for August 2019
+Need to pay', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (16, '/2019/8', 'M', 8, 'Salary August 2019', '2019-08-25', 'Salarycheck', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (17, '/2019/8', 'I', 3, 'Wheel change', '2019-08-25', 'Invoice for wheel change in March 2019
+Price: XY€', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (18, '/2019/8', 'B', 4, 'Abo check', '2019-08-25', 'Need to check my local supermarket abo', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (19, '/2019/8', 'M', 7, 'Money back form event', '2019-08-25', 'Got some money back from the recent event in July 2019
+Amount: XY €', 'test', null, '01DemoFile.txt', null);
+INSERT INTO mydms.documents (id, path, type, sender, title, date, text, user, number, file, file_rand) VALUES (20, '/2019/8', 'B', 3, 'New Car licence', '2019-08-25', 'Licence to the new car', 'test', null, '01DemoFile.txt', null);
 create table documents_tag
 (
   tag      varchar(50) not null,
