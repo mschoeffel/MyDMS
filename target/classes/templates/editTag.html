@@ -29,51 +29,51 @@
                     </div>
                     <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
                     </div>
-                    <form th:action="@{/web/tag/update/} + ${tag.tag}" method="POST">
+                    <form th:action="@{/web/tag/update/} + *{tag}" th:method="POST" th:object="${tag}">
                         <div class="form-row">
                             <div class="col-lg-4 mb-3">
                                 <label for="tag">Tag</label>
                                 <input type="text" class="form-control" id="tag" name="tag" placeholder="Tag"
-                                       th:value="${tag.tag}" required>
+                                       th:value="*{tag}" required>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="color">Color</label>
                                 <select class="custom-select" id="color" name="color">
                                     <option selected>Choose...</option>
-                                    <option value="badge-danger" th:selected="${tag.color == 'badge-danger'}">Red
+                                    <option value="badge-danger" th:selected="*{color == 'badge-danger'}">Red
                                     </option>
-                                    <option value="badge-primary" th:selected="${tag.color == 'badge-primary'}">Blue
+                                    <option value="badge-primary" th:selected="*{color == 'badge-primary'}">Blue
                                     </option>
-                                    <option value="badge-secondary" th:selected="${tag.color == 'badge-secondary'}">Gray
+                                    <option value="badge-secondary" th:selected="*{color == 'badge-secondary'}">Gray
                                     </option>
-                                    <option value="badge-success" th:selected="${tag.color == 'badge-success'}">Green
+                                    <option value="badge-success" th:selected="*{color == 'badge-success'}">Green
                                     </option>
-                                    <option value="badge-warning" th:selected="${tag.color == 'badge-warning'}">Yellow
+                                    <option value="badge-warning" th:selected="*{color == 'badge-warning'}">Yellow
                                     </option>
-                                    <option value="badge-info" th:selected="${tag.color == 'badge-info'}">Cyan
+                                    <option value="badge-info" th:selected="*{color == 'badge-info'}">Cyan
                                     </option>
-                                    <option value="badge-light" th:selected="${tag.color == 'badge-light'}">Light
+                                    <option value="badge-light" th:selected="*{color == 'badge-light'}">Light
                                     </option>
-                                    <option value="badge-dark" th:selected="${tag.color == 'badge-dark'}">Dark
+                                    <option value="badge-dark" th:selected="*{color == 'badge-dark'}">Dark
                                     </option>
                                 </select>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="user">User</label>
                                 <input type="text" class="form-control" id="user" placeholder="User"
-                                       th:value="${tag.user.username}" disabled>
+                                       th:value="*{user.username}" disabled>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-8 mb-3">
                                 <label for="text">Text</label>
                                 <input type="text" class="form-control" id="text" name="text" placeholder="Text"
-                                       th:value="${tag.text}">
+                                       th:value="*{text}">
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="date">Date</label>
                                 <input type="date" class="form-control" id="date" placeholder="2000-01-01"
-                                       th:value="${tag.date}" disabled>
+                                       th:value="*{date}" disabled>
                             </div>
                         </div>
                         <br>
@@ -108,7 +108,7 @@
             <div class="modal-body">
                 Soll der Datensatz und das Dokument wirklich gelöscht werden?
             </div>
-            <form th:action="@{/web/tag/delete/} + ${tag.tag}" method="POST">
+            <form th:action="@{/web/tag/delete/} + *{tag}" method="POST">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-danger">Delete</button>
