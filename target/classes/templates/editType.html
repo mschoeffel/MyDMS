@@ -29,34 +29,34 @@
                     </div>
                     <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
                     </div>
-                    <form th:action="@{/web/type/update/} + ${type.short_name}" method="POST">
+                    <form th:action="@{/web/type/update/} + ${type.short_name}" th:object="${type}" method="POST">
                         <div class="form-row">
                             <div class="col-lg-4 mb-3">
                                 <label for="name">Type</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Type"
-                                       th:value="${type.name}" required>
+                                       th:value="*{name}" required>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="short_name">Short</label>
                                 <input type="text" class="form-control" id="short_name" placeholder="Short"
-                                       name="short_name" th:value="${type.short_name}" required>
+                                       name="short_name" th:value="*{short_name}" required>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="user">User</label>
                                 <input type="text" class="form-control" placeholder="User" id="user"
-                                       th:value="${type.user.username}" disabled>
+                                       th:value="*{user.username}" disabled>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-8 mb-3">
                                 <label for="text">Text</label>
                                 <input type="text" class="form-control" id="text" name="text" placeholder="Text"
-                                       th:value="${type.text}" required>
+                                       th:value="*{text}" required>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="date">Date</label>
                                 <input type="date" class="form-control" id="date" placeholder="2000-01-01"
-                                       th:value="${type.date}" disabled>
+                                       th:value="*{date}" disabled>
                             </div>
                         </div>
                         <br>
