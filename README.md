@@ -11,7 +11,4 @@ To open the swagger ui open the URL `localhost:8080/swagger-ui.html`.
 
 Note: If you want a demo database you can use the `mydbs_db_demo_setup.sql` to set up the database with some example data for the application. (the login there sill keeps the same)
 
-Future TODO:
-* Update the Thymeleaf forms to use objects.
-
 &copy; mschoeffel
