@@ -40,12 +40,12 @@
                     </div>
                     <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
                     </div>
-                    <form th:action="@{/web/user/update/} + ${user.username}" method="POST">
+                    <form th:action="@{/web/user/update/} + ${user.username}" th:object="${user}" th:method="POST">
                         <div class="form-row">
                             <div class="col-lg-4 mb-3">
                                 <label for="username">User</label>
                                 <input type="text" class="form-control" placeholder="Username" id="username"
-                                       name="username" th:value="${user.username}" required>
+                                       name="username" th:value="*{username}" required>
                             </div>
                             <div class="col-lg-8 mb-3">
                                 <label for="email">E-Mail</label>
@@ -54,32 +54,32 @@
                                         <span class="input-group-text" id="inputGroupPrepend3">@</span>
                                     </div>
                                     <input type="email" class="form-control" placeholder="E-Mail" name="email"
-                                           id="email" th:value="${user.email}" aria-describedby="inputGroupPrepend3">
+                                           id="email" th:value="*{email}" aria-describedby="inputGroupPrepend3">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row"><!--Only visible by new user-->
-                            <div class="col-lg-4 mb-3" th:if="${user.username} == null">
+                            <div class="col-lg-4 mb-3" th:if="*{username} == null">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" placeholder="Password"
-                                       name="password" th:value="${user.password}" required>
+                                       name="password" th:value="*{password}" required>
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="date">Date</label>
                                 <input type="date" class="form-control" id="date" placeholder="2000-01-01"
-                                       th:value="${user.date}">
+                                       th:value="*{date}">
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" placeholder="Name" name="name"
-                                       th:value="${user.name}">
+                                       th:value="*{name}">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-6 mb-3 v-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="enabled" name="enabled"
-                                           th:checked="${user.enabled}">
+                                           th:checked="*{enabled}">
                                     <label class="custom-control-label" for="enabled">Active</label>
                                 </div>
                             </div>
