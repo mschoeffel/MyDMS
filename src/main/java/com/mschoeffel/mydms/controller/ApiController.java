@@ -48,19 +48,19 @@ public class ApiController {
         return documentService.findById(id);
     }
 
-    @RequestMapping(value = "/documents", method = RequestMethod.DELETE, params = {"id"})
+    @RequestMapping(value = "/document", method = RequestMethod.DELETE, params = {"id"})
     public void deleteDocument(@RequestParam int id){
         documentService.deleteById(id);
     }
 
-    @RequestMapping(value = "/documents", method = RequestMethod.POST)
+    @RequestMapping(value = "/document", method = RequestMethod.POST)
     public ResponseEntity<Object> createDocument(@RequestBody Document document){
         Document savedDocument = documentService.save(document);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(savedDocument.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
-    @RequestMapping(value = "/documents", method = RequestMethod.PUT, params = {"id"})
+    @RequestMapping(value = "/document", method = RequestMethod.PUT, params = {"id"})
     public ResponseEntity<Object> updateDocument(@RequestBody Document document, @RequestParam int id){
         document.setId(id);
         documentService.save(document);
