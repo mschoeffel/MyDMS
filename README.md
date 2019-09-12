@@ -11,4 +11,7 @@ To open the swagger ui open the URL `localhost:8080/swagger-ui.html`.
 
 Note: If you want a demo database you can use the `mydbs_db_demo_setup.sql` to set up the database with some example data for the application. (the login there sill keeps the same)
 
+Or, if you want to keep it really simple as demo just use the `h2_application.properties` and `h2_data.sql` and remove the "h2_" and replace the existing `application.properties`. With this new configuration the WebApp will use a H2 database instead of th MySQL and will already have some demo data.\
+NOTE: H2 is not persistent so if you shut down or restart the WebApp all the data wil be resettet.
+
 &copy; mschoeffel
