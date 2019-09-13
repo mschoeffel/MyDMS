@@ -24,7 +24,7 @@
             <div class="card-header">
               <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                  <a class="nav-link active" th:disabled="${isNew} == true" th:href="@{/web/document/download/} + ${document.id}">Download</a>
+                  <a  th:class="'nav-link' + (${isNew} ? ' disabled': ' active')" th:href="@{/web/document/download/} + ${document.id}">Download</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" th:text="${document.type?.name}"></a>

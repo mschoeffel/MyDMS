@@ -29,7 +29,7 @@
                     </div>
                     <div th:if="${error != null}" th:utext="${error}" class="alert alert-danger" role="alert">
                     </div>
-                    <form th:action="@{/web/type/update/} + ${type.short_name}" th:object="${type}" method="POST">
+                    <form th:action="@{/web/type/update/} + *{short_name}" th:object="${type}" th:method="POST">
                         <div class="form-row">
                             <div class="col-lg-4 mb-3">
                                 <label for="name">Type</label>
